@@ -1,1 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
+@import "reset.scss";
+
+body {
+  font-family: "Ubuntu Mono", monospace;
+}
+
+.logo {
+  font-family: "Turret Road", cursive;
+  font-weight: 300;
+  font-size: 30px;
+  color: #777;
+  border-bottom: 1px solid #777;
+  width: 200px;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.page {
+  padding: 30px;
+}
+
+.nodes {
+  margin-top: 45px;
+
+  .node {
+    margin: 15px;
+    border:2px solid #ccc;
+    max-width: 320px;
+    border-radius: 15px;
+    padding: 15px;
+    box-sizing: border-box;
+
+    .title {
+      font-weight: bold;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      li {
+        font-size: 13px;
+        display: block;
+        padding: 5px;
+        border-bottom: 1px solid #ddd;
+        color: #999;
+        font-weight: bold;
+        span {
+          color: #000;
+          font-weight: 500;
+        }
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+}
