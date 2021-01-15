@@ -16,9 +16,12 @@
   </div>
 
 
-  <div class="nodes">
-    <div class="container">
-      <div class="node">
+  <div class="container">
+
+
+    <aside>
+
+      <div class="box">
 
         <div class="title">
 
@@ -31,8 +34,13 @@
 
         </div>
 
-
         <div class="actions">
+
+          <button>
+            <img src="assets/icons/solid/info-circle.svg" alt="">
+            Info
+          </button>
+
           <button>
             <img src="assets/icons/brands/docker.svg" alt="">
             Docker
@@ -191,12 +199,57 @@
 
       </div>
 
-      <div class="node">
+    </aside>
+
+    <aside class="second">
+      <div class="map">
+        <img src="http://localhost:3000/api/v1/sysinfo/local/location.svg" alt="">
+      </div>
+
+      <div class="box">
+
+        <div class="title">
+          Current shells
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>
+                IP
+              </th>
+              <th>
+                OS
+              </th>
+              <th>ISP</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr>
+              <td>
+                135.181.95.97
+              </td>
+              <td>
+                linux Ubuntu 20.04.1 LTS
+              </td>
+              <td>
+                Hetzner Online GmbH
+              </td>
+              <td>
+                Finland, Tuusula
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <hr>
+        
         <form autocomplete="off" role="presentation">
+
           <div class="title">
-            <img class="invert" src="assets/icons/solid/terminal.svg" />
-            Manage new node
-            <small>Connect SSH shell</small>
+            Manage new shell
           </div>
 
           <div class="form-field">
@@ -231,8 +284,7 @@
           </div>
         </form>
       </div>
-
-    </div>
+    </aside>
 
   </div>
 
