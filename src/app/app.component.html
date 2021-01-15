@@ -19,18 +19,20 @@
   <div class="nodes">
     <div class="container">
       <div class="node">
+
         <div class="title">
-          Local System
+
+          <img *ngIf="general?.os?.distro?.toLowerCase() === 'ubuntu'" src="assets/logos/ubuntu-original.svg" alt="">
+          <img *ngIf="general?.os?.distro?.toLowerCase() === 'redhat'" src="assets/logos/redhat-original.svg" alt="">
+          <img *ngIf="general?.os?.platform?.toLowerCase() === 'windows'" src="assets/logos/windows-original.svg"
+            alt="">
+          {{general.system?.version}}
+          {{general.system?.virtual ? '(VIRTUAL)': ''}}
+
         </div>
 
         <ul>
 
-          <li>
-            Memory:
-            <span>
-              {{general?.memory[0]?.size | bytes : 2}}
-            </span>
-          </li>
 
           <li>
             OS:
@@ -64,11 +66,124 @@
           </li>
 
 
+          <li>
+            Memory:
+            <span>
+            </span>
+            <ul>
+              <li *ngFor="let memory of general?.memories">
+                <span>
+                  {{memory?.type }}
+                  {{memory?.size | bytes : 2}}
+                </span>
+
+              </li>
+            </ul>
+
+          </li>
+
+
+          <li>
+            Disk:
+            <ul>
+              <li *ngFor="let disk of general?.disks">
+                <span>
+                  {{disk?.type }}
+                  {{disk?.vendor }}
+                  {{disk?.size | bytes : 2}}
+                </span>
+
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            Graphics:
+            <ul>
+              <li *ngFor="let c of general?.graphics?.controllers">
+                <span>
+                  {{ c.vendor.replace('Corporation','')}}
+                  {{ c.model.replace('Graphics Controller', '') }}
+                </span>
+              </li>
+            </ul>
+          </li>
+
+
+          <li>
+            Networks:
+            <ul>
+              <li *ngFor="let n of general?.networks">
+                <span>
+                  {{n.type === 'virtual' ? '' : n.virtual ? 'virtual' : ''}}
+                  {{n.type}}
+                  {{n.iface}}
+                  {{n.ip4}}
+                  {{n.dhcp ? '(DHCP)' : ''}}
+                </span>
+              </li>
+            </ul>
+          </li>
+
+
+
+          <li class="versions">
+
+            <div class="icon" *ngFor="let app of general?.versions | keys">
+              <img [src]="'assets/logos/' + app + '-original.svg'" alt="">
+              <span>
+                {{general?.versions[app] }}
+              </span>
+            </div>
+
+          </li>
+
 
 
         </ul>
 
       </div>
+
+      <div class="node">
+        <form autocomplete="off" role="presentation">
+          <div class="title">
+          <img src="assets/icons/solid/terminal.svg" />
+            Manage new node
+            <small>Connect SSH shell</small>
+          </div>
+
+          <div class="form-field">
+            <label for="ip">
+              IP Address
+            </label>
+            <input type="text" placeholder="1.2.3.4" id="ip" />
+          </div>
+
+          <div class="form-field">
+            <label for="srp">
+              Root password
+            </label>
+            <input type="password" autocomplete="" placeholder="SSH Root password" id="srp" />
+
+
+            <button>
+              Save & Connect
+            </button>
+
+            <div class="links">
+              <a href="https://askubuntu.com/questions/44418/how-to-enable-root-login">
+                Enable root login (Ubuntu)
+              </a>
+              <a href="">
+                Enable root login over SSH (Ubuntu)
+              </a>
+            </div>
+
+
+          </div>
+        </form>
+      </div>
+
     </div>
 
   </div>

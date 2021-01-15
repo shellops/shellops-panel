@@ -6,14 +6,15 @@
 
 body {
   font-family: "Ubuntu Mono", monospace;
+  font-size: 13px;
 }
 
 .logo {
   font-family: "Turret Road", cursive;
   font-weight: 300;
-  font-size: 30px;
+  font-size: 21px;
   color: #777;
-  border-bottom: 1px solid #777;
+  border-bottom: 1px solid #ccc;
   width: 200px;
 }
 
@@ -27,39 +28,142 @@ body {
 }
 
 .nodes {
-  margin-top: 45px;
+  margin-top: 30px;
 
   .node {
     margin: 15px;
-    border:2px solid #ccc;
-    max-width: 320px;
+    border: 2px solid #ccc;
+    width: 360px;
     border-radius: 15px;
-    padding: 15px;
+    padding: 0 10px 10px 10px;
     box-sizing: border-box;
+    display: inline-block;
+    vertical-align: top;
 
     .title {
       font-weight: bold;
       color: #777;
-      margin-bottom: 15px;
+      font-size: 17px;
+      line-height: 40px;
+
+      small {
+        font-size: 11px;
+        font-weight: 100;
+      }
+
+      img {
+        width: 30px;
+        max-height: 30px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
     }
 
     ul {
       li {
         font-size: 13px;
         display: block;
-        padding: 5px;
+        padding: 0 5px;
         border-bottom: 1px solid #ddd;
         color: #999;
         font-weight: bold;
+        line-height: 24px;
+
+        .inline {
+          display: inline-block;
+          vertical-align: top;
+        }
         span {
           color: #000;
           font-weight: 500;
+        }
+
+        ul {
+          padding-left: 15px;
+          li {
+            border-bottom: none;
+            padding: 0;
+            line-height: 18px;
+            font-size: 11px;
+          }
         }
 
         &:last-child {
           border-bottom: none;
         }
       }
+
+      li.versions {
+        .icon {
+          text-align: center;
+          display: inline-block;
+          vertical-align: top;
+          margin: 5px;
+          box-sizing: border-box;
+
+          padding: 5px;
+          border-radius: 10px;
+          line-height: 18px;
+          img {
+            max-height: 30px;
+            max-width: 30px;
+            min-height: 30px;
+            display: block;
+            margin: 0 auto;
+          }
+
+          span {
+            font-size: 9px;
+          }
+        }
+      }
     }
+  }
+}
+
+form {
+  .form-field {
+    margin: 10px 0;
+  }
+
+  .links {
+    margin: 10px 5px;
+
+    a {
+      display: block;
+      border-bottom: 1px dashed #ccc;
+      color: #777;
+      text-decoration: none;
+      font-weight: 100;
+      font-size: 11px;
+      line-height: 20px;
+    }
+  }
+
+  input {
+    display: block;
+    line-height: 28px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #ccc;
+    padding: 0 5px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  label {
+    font-weight: bold;
+    color: #777;
+    line-height: 28px;
+  }
+  button {
+    margin: 30px 0 0 0;
+    padding: 5px 15px;
+    background: none;
+    border: 1px solid #555;
+    color: #555;
+    font-weight: bold;
+    border-radius: 5px;
   }
 }

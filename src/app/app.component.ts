@@ -1,6 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SysInfo } from './interfaces/sysinfo'
+import { pick } from 'lodash';
+
+import { SysInfo } from './interfaces/sysinfo';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,13 +12,13 @@ import { SysInfo } from './interfaces/sysinfo'
 export class AppComponent implements OnInit {
 
   public general: {
-    memory: SysInfo.MemLayoutData[],
+    memories: SysInfo.MemLayoutData[],
     cpu: SysInfo.CpuData,
     system: SysInfo.SystemData,
     os: SysInfo.OsData,
-    disk: SysInfo.DiskLayoutData,
+    disks: SysInfo.DiskLayoutData,
     graphics: SysInfo.GraphicsData,
-    network: SysInfo.NetworkInterfacesData,
+    networks: SysInfo.NetworkInterfacesData[],
     versions: SysInfo.VersionData
   }
 
@@ -26,6 +29,22 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
 
     this.general = await this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/local/general').toPromise();
+
+    this.general.versions = pick(this.general.versions,
+      [
+        'docker',
+        'node',
+        'npm',
+        'mongodb',
+        'redis',
+        'mysql',
+        'postgres',
+        'nginx',
+        'php',
+        'apache',
+        'java',
+        'git',
+      ].filter(p => this.general.versions[p]));
 
   }
 }
