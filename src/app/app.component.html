@@ -31,9 +31,38 @@
 
         </div>
 
+
+        <div class="actions">
+          <button>
+            <img src="assets/icons/brands/docker.svg" alt="">
+            Docker
+          </button>
+
+          <button>
+            <img src="assets/icons/solid/download.svg" alt="">
+            Backup
+          </button>
+
+          <button>
+            <img src="assets/icons/solid/network-wired.svg" alt="">
+            Network
+          </button>
+
+          <button>
+            <img src="assets/icons/solid/shield-alt.svg" alt="">
+            Firewall
+          </button>
+
+
+          <button>
+            <img src="assets/icons/solid/fire-extinguisher.svg" alt="">
+            Alerting
+          </button>
+
+
+        </div>
+
         <ul>
-
-
           <li>
             OS:
             <span>
@@ -79,9 +108,7 @@
 
               </li>
             </ul>
-
           </li>
-
 
           <li>
             Disk:
@@ -126,7 +153,6 @@
           </li>
 
 
-
           <li class="versions">
 
             <div class="icon" *ngFor="let app of general?.versions | keys">
@@ -147,7 +173,7 @@
       <div class="node">
         <form autocomplete="off" role="presentation">
           <div class="title">
-          <img src="assets/icons/solid/terminal.svg" />
+            <img src="assets/icons/solid/terminal.svg" />
             Manage new node
             <small>Connect SSH shell</small>
           </div>
@@ -167,7 +193,7 @@
 
 
             <button>
-              Save & Connect
+               Connect & Install client
             </button>
 
             <div class="links">

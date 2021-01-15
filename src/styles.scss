@@ -28,17 +28,42 @@ body {
 }
 
 .nodes {
-  margin-top: 30px;
+  margin-top: 15px;
 
   .node {
     margin: 15px;
     border: 2px solid #ccc;
     width: 360px;
     border-radius: 15px;
-    padding: 0 10px 10px 10px;
+    padding: 5px 10px 10px 10px;
     box-sizing: border-box;
     display: inline-block;
     vertical-align: top;
+
+    .actions {
+      margin: 10px 0;
+
+      button {
+        margin-right: 5px;
+        border-radius: 5px;
+        font-weight: bold;
+        border: 1px solid #ccc;
+        font-size: 11px;
+        line-height: 20px;
+        color: #444;
+        background: none;
+        padding: 5px;
+        text-align: center;
+        color: #444;
+
+        img {
+          opacity: 0.7;
+          height: 20px;
+          margin: 0 auto;
+          display: block;
+        }
+      }
+    }
 
     .title {
       font-weight: bold;
@@ -127,18 +152,13 @@ form {
     margin: 10px 0;
   }
 
-  .links {
-    margin: 10px 5px;
-
-    a {
-      display: block;
-      border-bottom: 1px dashed #ccc;
-      color: #777;
-      text-decoration: none;
-      font-weight: 100;
-      font-size: 11px;
-      line-height: 20px;
-    }
+  a {
+    border-bottom: 1px dashed #ccc;
+    color: #777;
+    text-decoration: none;
+    font-weight: 100;
+    font-size: 11px;
+    line-height: 20px;
   }
 
   input {
@@ -157,13 +177,23 @@ form {
     color: #777;
     line-height: 28px;
   }
+
   button {
-    margin: 30px 0 0 0;
-    padding: 5px 15px;
+    margin: 15px 0;
+    padding: 5px 10px;
     background: none;
     border: 1px solid #555;
     color: #555;
     font-weight: bold;
     border-radius: 5px;
+    font-size: 11px;
+  }
+
+  .links {
+    margin: 0 5px;
+
+    a {
+      display: block;
+    }
   }
 }
