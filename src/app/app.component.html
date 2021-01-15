@@ -53,6 +53,11 @@
             Firewall
           </button>
 
+          <button>
+            <img src="assets/icons/solid/mail-bulk.svg" alt="">
+            Mailing
+          </button>
+
 
           <button>
             <img src="assets/icons/solid/fire-extinguisher.svg" alt="">
@@ -136,6 +141,22 @@
             </ul>
           </li>
 
+          <li>
+            Public IP:
+
+            <ul>
+              <li>
+                <span>
+                  <img
+                    [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
+                  <span *ngIf="geoIp?.ip">
+                    {{geoIp?.ip}} {{geoIp?.isp}} - {{geoIp?.country}}, {{geoIp?.city}}
+                  </span>
+                </span>
+              </li>
+            </ul>
+
+          </li>
 
           <li>
             Networks:
@@ -173,7 +194,7 @@
       <div class="node">
         <form autocomplete="off" role="presentation">
           <div class="title">
-            <img src="assets/icons/solid/terminal.svg" />
+            <img class="invert" src="assets/icons/solid/terminal.svg" />
             Manage new node
             <small>Connect SSH shell</small>
           </div>
@@ -193,13 +214,14 @@
 
 
             <button>
-               Connect & Install client
+              Connect & Install client
             </button>
 
             <div class="links">
               <a href="https://askubuntu.com/questions/44418/how-to-enable-root-login">
                 Enable root login (Ubuntu)
               </a>
+              <br>
               <a href="">
                 Enable root login over SSH (Ubuntu)
               </a>
