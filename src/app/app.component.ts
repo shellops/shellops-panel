@@ -63,6 +63,21 @@ export class AppComponent implements OnInit {
 
   async ngOnInit() {
 
+
+    const ws = new WebSocket('ws://localhost:3000');
+
+    ws.onopen = (ev) => {
+
+      console.log('socket open', ev);
+
+      ws.send(JSON.stringify({ event: 'events' }));
+
+      ws.onmessage = (msg) => {
+        console.log('socket msg', msg);
+      }
+
+    };
+
     await this.loadNodes();
 
     this.general = await this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/local/general').toPromise();

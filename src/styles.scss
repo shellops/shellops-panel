@@ -58,6 +58,7 @@ aside {
 .box {
   width: 100%;
   border-radius: 0 15px 15px 15px;
+  margin-bottom: 30px;
   padding: 5px 10px 10px 10px;
   box-sizing: border-box;
   display: inline-block;
@@ -76,6 +77,11 @@ aside {
 
   table {
     width: 100%;
+    line-height: 24px;
+    tr:nth-child(2n) {
+      background: #222;
+    }
+
     th,
     td {
       padding: 5px;
@@ -236,8 +242,8 @@ form {
     padding: 0 5px;
     border-radius: 5px;
     width: 100%;
-    color:#fff;
-    
+    color: #fff;
+
     box-sizing: border-box;
   }
 
