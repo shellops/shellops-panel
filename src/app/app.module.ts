@@ -13,6 +13,7 @@ import { AccountComponent } from './pages/account/account.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { NodesComponent } from './pages/nodes/nodes.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NodesComponent } from './pages/nodes/nodes.component';
     NgPipesModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

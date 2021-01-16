@@ -32,11 +32,38 @@ export class AppComponent implements OnInit {
     ip: string
   };
 
+  public newShell = {
+    host: '',
+    password: ''
+  };
+
+
+
+  nodes: any;
+
   constructor(private readonly http: HttpClient) {
 
   }
 
+  async addNewShell() {
+
+    await this.http.post<any>('http://localhost:3000' + '/api/v1/node', this.newShell).toPromise();
+
+    await this.loadNodes();
+
+    this.newShell = {
+      host: '',
+      password: ''
+    };
+  }
+
+  async loadNodes() {
+    this.nodes = await this.http.get<any>('http://localhost:3000' + '/api/v1/nodes').toPromise();
+  }
+
   async ngOnInit() {
+
+    await this.loadNodes();
 
     this.general = await this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/local/general').toPromise();
 
@@ -60,9 +87,8 @@ export class AppComponent implements OnInit {
         'apache',
         'java',
         'git',
+        'virtualbox',
       ].filter(p => this.general.versions[p]));
-
-
 
   }
 }

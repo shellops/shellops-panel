@@ -79,7 +79,6 @@
           <li>
             OS:
             <span>
-              {{general?.os?.platform }}
               {{general?.os?.distro }}
               {{general?.os?.release }}
             </span>
@@ -229,23 +228,39 @@
 
             <tr>
               <td>
-                135.181.95.97
+                {{geoIp?.ip}}
               </td>
               <td>
-                linux Ubuntu 20.04.1 LTS
+                {{general?.os?.distro}}
+                {{general?.os?.release}}
               </td>
               <td>
-                Hetzner Online GmbH
+                {{geoIp?.isp}}
+
               </td>
               <td>
-                Finland, Tuusula
+                {{geoIp?.city}},
+                {{geoIp?.country}}
+              </td>
+            </tr>
+
+            <tr *ngFor="let node of nodes">
+              <td>
+                {{node?.host}}
+              </td>
+
+              <td>
+              </td>
+              <td>
+              </td>
+              <td>
               </td>
             </tr>
           </tbody>
         </table>
 
         <hr>
-        
+
         <form autocomplete="off" role="presentation">
 
           <div class="title">
@@ -253,20 +268,22 @@
           </div>
 
           <div class="form-field">
-            <label for="ip">
+            <label for="host">
               IP Address
             </label>
-            <input type="text" placeholder="1.2.3.4" id="ip" />
+            <input type="text" [(ngModel)]="newShell.host" placeholder="1.2.3.4" name="host" />
           </div>
 
+          {{newShell |json}}
           <div class="form-field">
-            <label for="srp">
+            <label for="password">
               Root password
             </label>
-            <input type="password" autocomplete="" placeholder="SSH Root password" id="srp" />
+            <input type="password" [(ngModel)]="newShell.password" autocomplete="" placeholder="SSH Root password"
+              name="password" />
 
 
-            <button>
+            <button (click)="addNewShell()">
               Connect & Install client
             </button>
 
@@ -275,7 +292,7 @@
                 Enable root login (Ubuntu)
               </a>
               <br>
-              <a href="">
+              <a href="https://www.liquidweb.com/kb/enable-root-login-via-ssh/">
                 Enable root login over SSH (Ubuntu)
               </a>
             </div>
