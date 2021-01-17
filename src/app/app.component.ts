@@ -64,25 +64,25 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
 
 
-    const ws = new WebSocket('ws://localhost:3000');
+    // const ws = new WebSocket('ws://localhost:3000');
 
-    ws.onopen = (ev) => {
+    // ws.onopen = (ev) => {
 
-      console.log('socket open', ev);
+    //   console.log('socket open', ev);
 
-      ws.send(JSON.stringify({ event: 'events' }));
+    //   ws.send(JSON.stringify({ event: 'events' }));
 
-      ws.onmessage = (msg) => {
-        console.log('socket msg', msg);
-      }
+    //   ws.onmessage = (msg) => {
+    //     console.log('socket msg', msg);
+    //   }
 
-    };
+    // };
 
     await this.loadNodes();
 
-    this.general = await this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/local/general').toPromise();
+    this.general = await this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/localhost/general').toPromise();
 
-    this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/local/geo-ip')
+    this.http.get<any>('http://localhost:3000' + '/api/v1/sysinfo/localhost/geo-ip')
       .toPromise().then(res => {
         this.geoIp = res;
       }).catch((e) => console.warn(e));
