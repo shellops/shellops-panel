@@ -12,8 +12,10 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { AccountComponent } from './pages/account/account.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { SigninComponent } from './pages/signin/signin.component';
-import { NodesComponent } from './pages/nodes/nodes.component';
 import { FormsModule } from '@angular/forms';
+import { ConnectComponent } from './components/connect/connect.component';
+import { MapComponent } from './components/map/map.component';
+import { NodesComponent } from './components/nodes/nodes.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { FormsModule } from '@angular/forms';
     SignupComponent,
     SigninComponent,
     NodesComponent,
+    ConnectComponent,
+    MapComponent,
   ],
   imports: [
     NgPipesModule,

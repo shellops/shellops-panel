@@ -20,7 +20,7 @@ body {
 }
 
 .container {
-  max-width: 990px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -35,13 +35,14 @@ aside {
   display: inline-block;
   vertical-align: top;
   text-align: center;
-  width: 50%;
+  width: 480px;
   padding: 40px;
   padding-right: 15px;
   box-sizing: border-box;
 
   &.second {
     padding: 0;
+    width: calc(100% - 480px);
   }
 }
 
@@ -82,6 +83,16 @@ aside {
       background: #222;
     }
 
+    tr{
+      cursor: pointer;
+    }
+
+    tr.selected {
+      td {
+        color: #fff;
+      }
+    }
+
     th,
     td {
       padding: 5px;
@@ -95,6 +106,12 @@ aside {
     td {
       font-size: 11px;
       color: #eee;
+
+      img {
+        display: inline-block;
+        vertical-align: middle;
+        height: 20px;
+      }
     }
   }
 

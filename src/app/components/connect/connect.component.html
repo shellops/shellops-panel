@@ -1,0 +1,38 @@
+
+      <div class="box">
+
+        <form autocomplete="off" role="presentation">
+
+          <div class="form-field">
+            <label for="host">
+              IP Address
+            </label>
+            <input type="text" [(ngModel)]="newShell.host" placeholder="1.2.3.4" name="host" />
+          </div>
+
+          <div class="form-field">
+            <label for="password">
+              Root password
+            </label>
+            <input type="password" [(ngModel)]="newShell.password" autocomplete="" placeholder="SSH Root password"
+              name="password" />
+
+
+            <button (click)="addNewShell()">
+              Connect & Install client
+            </button>
+
+            <div class="links">
+              <a href="https://askubuntu.com/questions/44418/how-to-enable-root-login">
+                Enable root login (Ubuntu)
+              </a>
+              <br>
+              <a href="https://www.liquidweb.com/kb/enable-root-login-via-ssh/">
+                Enable root login over SSH (Ubuntu)
+              </a>
+            </div>
+
+
+          </div>
+        </form>
+      </div>

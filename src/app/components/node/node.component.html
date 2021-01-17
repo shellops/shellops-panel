@@ -1,1 +1,172 @@
-<p>node works!</p>
+<div class="box">
+
+  <div class="title">
+
+    <img *ngIf="model?.general?.os?.distro?.toLowerCase() === 'ubuntu'" src="assets/logos/ubuntu-original.svg" alt="">
+    <img *ngIf="model?.general?.os?.distro?.toLowerCase() === 'redhat'" src="assets/logos/redhat-original.svg" alt="">
+    <img *ngIf="model?.general?.os?.platform?.toLowerCase() === 'windows'" src="assets/logos/windows-original.svg"
+      alt="">
+    {{model?.general?.system?.version}}
+    {{model?.general?.system?.virtual ? '(VIRTUAL)': ''}}
+
+  </div>
+
+  <div class="actions">
+
+    <button>
+      <img src="assets/icons/solid/info-circle.svg" alt="">
+      Info
+    </button>
+
+    <button>
+      <img src="assets/icons/brands/docker.svg" alt="">
+      Docker
+    </button>
+
+    <button>
+      <img src="assets/icons/solid/download.svg" alt="">
+      Backup
+    </button>
+
+    <button>
+      <img src="assets/icons/solid/network-wired.svg" alt="">
+      Network
+    </button>
+
+    <button>
+      <img src="assets/icons/solid/shield-alt.svg" alt="">
+      Firewall
+    </button>
+
+    <button>
+      <img src="assets/icons/solid/mail-bulk.svg" alt="">
+      Mailing
+    </button>
+
+
+    <button>
+      <img src="assets/icons/solid/fire-extinguisher.svg" alt="">
+      Alerting
+    </button>
+
+
+  </div>
+
+  <ul>
+    <li>
+      OS:
+      <span>
+        {{model?.general?.os?.distro }}
+        {{model?.general?.os?.release }}
+      </span>
+    </li>
+
+    <li>
+      Hostname:
+      <span>
+        {{model?.general?.os?.hostname}}
+      </span>
+
+    </li>
+
+    <li>
+      Kernel:
+      <span>
+        {{model?.general?.os?.kernel}}
+      </span>
+    </li>
+
+    <li>
+      CPU:
+      <span>
+        {{model?.general?.cpu?.brand}}, {{model?.general?.cpu.cores}} Cores - {{model?.general?.cpu.speedmax}} GHZ
+      </span>
+    </li>
+
+
+    <li>
+      Memory:
+      <span>
+      </span>
+      <ul>
+        <li *ngFor="let memory of model?.general?.memories">
+          <span>
+            {{memory?.type }}
+            {{memory?.size | bytes : 2}}
+          </span>
+
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Disk:
+      <ul>
+        <li *ngFor="let disk of model?.general?.disks">
+          <span>
+            {{disk?.type }}
+            {{disk?.vendor }}
+            {{disk?.size | bytes : 2}}
+          </span>
+
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Graphics:
+      <ul>
+        <li *ngFor="let c of model?.general?.graphics?.controllers">
+          <span>
+            {{ c.vendor.replace('Corporation','')}}
+            {{ c.model.replace('Graphics Controller', '') }}
+          </span>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      Public IP:
+
+      <ul>
+        <li>
+          <span>
+            <img
+              [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (model?.geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
+            <span *ngIf="model?.geoIp?.ip">
+              {{model?.geoIp?.ip}} {{model?.geoIp?.isp}} - {{model?.geoIp?.country}}, {{model?.geoIp?.city}}
+            </span>
+          </span>
+        </li>
+      </ul>
+
+    </li>
+
+    <li>
+      Networks:
+      <ul>
+        <li *ngFor="let n of model?.general?.networks">
+          <span>
+            {{n.type === 'virtual' ? '' : n.virtual ? 'virtual' : ''}}
+            {{n.type}}
+            {{n.iface}}
+            {{n.ip4}}
+            {{n.dhcp ? '(DHCP)' : ''}}
+          </span>
+        </li>
+      </ul>
+    </li>
+
+    <li class="versions">
+
+      <div class="icon" *ngFor="let app of appVersions | keys">
+        <img [src]="'assets/logos/' + app + '-original.svg'" alt="">
+        <span>
+          {{model?.general?.versions[app] }}
+        </span>
+      </div>
+
+    </li>
+  </ul>
+
+</div>

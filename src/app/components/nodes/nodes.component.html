@@ -1,0 +1,74 @@
+<div class="box">
+
+    <table>
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    IP
+                </th>
+                <th>
+                    OS
+                </th>
+                <th>ISP</th>
+                <th>Location</th>
+
+                <th>
+                    CPU
+                </th>
+
+                <th>
+                    RAM
+                </th>
+
+                <th>
+                    DISK
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr *ngFor="let node of shellService.nodes" (click)="shellService.selectNode(node.host)"
+                [class.selected]="node.selected">
+                <td>
+                    <img class="invert" *ngIf="node.selected" src="assets/icons/solid/chevron-right.svg" alt="">
+                </td>
+                <td>
+                    <img
+                        [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (node?.geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
+                    {{node?.host}}
+                </td>
+
+                <td *ngIf="!node?.general" colspan="3">
+                    Connecting to ssh server ...
+                </td>
+
+                <td *ngIf="node?.general">
+                    {{node?.general?.os?.distro}}
+                    {{node?.general?.os?.release}}
+                </td>
+                <td *ngIf="node?.general">
+                    {{node?.geoIp?.isp || 'N/A'}}
+
+                </td>
+                <td *ngIf="node?.general">
+                    {{[node?.geoIp?.city,node?.geoIp?.country].join(', ') || 'N/A' }}
+                </td>
+
+                <td>
+                    {{node?.general?.cpu.cores}} Cores - {{node?.general?.cpu.speedmax || node?.general?.cpu.speed}} GHZ
+                </td>
+
+                <td>
+                    {{node?.general?.memories[0]?.size | bytes:2}}
+                </td>
+
+
+                <td>
+                    {{node?.general?.disks[0]?.size | bytes:2}}
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
