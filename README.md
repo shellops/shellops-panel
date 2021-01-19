@@ -1,27 +1,27 @@
-# ShellopsPanel
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://opensource.org/licenses/mit-license.php)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/shellops/shellops-api/graphs/commit-activity)
+![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)
+![TypeScript](https://badges.frapsoft.com/typescript/love/typescript.svg?v=101)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.6.
+# ShellOps Panel
 
-## Development server
+ShellOps Will provide set of features to developers to help them manage docker, databases, backups and alerting on their private servers.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This repository contains frontend for ShellOps panel.
 
-## Code scaffolding
+# To Run Project
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```sh
+git clone git@github.com:shellops/shellops-panel.git
 
-## Build
+cd shellops-panel
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+npm i
 
-## Running unit tests
+npm run dev
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+```
 
-## Running end-to-end tests
+## We are just starting
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Contributes are most welcome
