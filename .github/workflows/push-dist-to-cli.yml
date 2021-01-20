@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - run: sed 's/shellops-api/shellops/g' package.json > package-rename.json && mv package-rename.json package.json
       - run: npm install --prefer-offline --no-audit --no-progress
       - run: npm run build
       - run: pwd && ls dist -lia
@@ -30,7 +31,7 @@ jobs:
           source_file: "dist/*"
           destination_repo: "shellops/shellops-cli"
           destination_folder: "public"
-          destination_branch: "main"
+          destination_branch: "staging"
           user_email: "bot@shellops.io"
           user_name: "Shellops Bot"
           commit_message: "build: panel https://github.com/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
