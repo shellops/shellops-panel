@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { pick } from 'lodash';
+import { Component, Input } from '@angular/core';
+
 import { ShellNode } from '../../interfaces/shell-node.interface';
 
 @Component({
@@ -7,32 +7,9 @@ import { ShellNode } from '../../interfaces/shell-node.interface';
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.scss']
 })
-export class NodeComponent implements OnInit {
+export class NodeComponent   {
 
   @Input()
   model: ShellNode;
-
-  get appVersions() {
-    return pick(this.model?.general?.versions || {},
-      [
-        'docker',
-        'node',
-        'npm',
-        'mongodb',
-        'redis',
-        'mysql',
-        'postgres',
-        'nginx',
-        'php',
-        'apache',
-        'java',
-        'git',
-        'virtualbox',
-      ].filter(p => this.model?.general?.versions[p]));
-  }
-
-
-  async ngOnInit() {
-  }
-
+  
 }

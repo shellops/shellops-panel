@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { ConnectComponent } from './components/connect/connect.component';
 import { MapComponent } from './components/map/map.component';
 import { NodesComponent } from './components/nodes/nodes.component';
+import { NodeInfoComponent } from './components/node/node-info/node-info.component';
+import { LoadingComponent } from './layout/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NodesComponent } from './components/nodes/nodes.component';
     NodesComponent,
     ConnectComponent,
     MapComponent,
+    NodeInfoComponent,
+    LoadingComponent,
   ],
   imports: [
     NgPipesModule,

@@ -1,0 +1,11 @@
+.loading {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+
+  app-loading{
+      margin:0 auto;
+  }
+}
