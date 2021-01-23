@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th></th>
                 <th>
                     IP
                 </th>
@@ -35,11 +36,13 @@
                 </td>
                 <td>
                     <img
-                        [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (node?.geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
-                    {{node?.host}}
+                    [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (node?.geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
+                </td>
+                <td>
+                  {{node?.host}}
                 </td>
 
-                <td *ngIf="!node?.general" colspan="3">
+                <td *ngIf="!node?.general" colspan="6">
                     Connecting to ssh server ...
                 </td>
 
@@ -55,16 +58,16 @@
                     {{[node?.geoIp?.city,node?.geoIp?.country].join(', ') || 'N/A' }}
                 </td>
 
-                <td>
+                <td *ngIf="node?.general">
                     {{node?.general?.cpu.cores}} Cores - {{node?.general?.cpu.speedmax || node?.general?.cpu.speed}} GHZ
                 </td>
 
-                <td>
+                <td *ngIf="node?.general">
                     {{node?.general?.memories[0]?.size | bytes:2}}
                 </td>
 
 
-                <td>
+                <td *ngIf="node?.general">
                     {{node?.general?.disks[0]?.size | bytes:2}}
                 </td>
 
