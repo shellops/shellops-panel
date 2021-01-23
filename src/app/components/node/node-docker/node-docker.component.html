@@ -1,0 +1,40 @@
+<div *ngIf="model?.general?.versions?.docker">
+    <ul>
+        <li>
+            Version: {{model?.general?.versions?.docker}}
+        </li>
+
+        <li *ngFor="let container of model?.docker?.containers">
+            Container:
+            <span>
+                {{container.name}}
+            </span>
+            <ul>
+                <li>
+                    Image: <span>{{container.image}}</span>
+                </li>
+                <li>
+                    Restarts: <span>{{container.restartCount}}</span>
+                </li>
+                <li>
+                    State: <span>{{container.state}}</span>
+                </li>
+
+                <li>
+                    Created At: <span>{{container.createdAt | date}}</span>
+                </li>
+
+                <li>
+                    Started At: <span>{{container.startedAt | date}}</span>
+                </li>
+                
+            </ul>
+        </li>
+
+    </ul>
+</div>
+
+
+<div *ngIf="!model?.general?.versions?.docker">
+    Install docker
+</div>

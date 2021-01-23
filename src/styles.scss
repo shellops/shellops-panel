@@ -59,8 +59,12 @@ body {
       background: none;
       padding: 5px 8px 0 8px;
       text-align: center;
-      color: #ccc;
+      color: #aeaeae;
       margin: 5px 0;
+
+      &.active {
+        color: #fff;
+      }
 
       img {
         opacity: 0.7;
@@ -157,7 +161,6 @@ body {
     }
   }
 }
-
 
 table {
   width: 100%;

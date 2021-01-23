@@ -18,6 +18,7 @@ import { MapComponent } from './components/map/map.component';
 import { NodesComponent } from './components/nodes/nodes.component';
 import { NodeInfoComponent } from './components/node/node-info/node-info.component';
 import { LoadingComponent } from './layout/loading/loading.component';
+import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LoadingComponent } from './layout/loading/loading.component';
     MapComponent,
     NodeInfoComponent,
     LoadingComponent,
+    NodeDockerComponent,
   ],
   imports: [
     NgPipesModule,

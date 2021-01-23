@@ -45,6 +45,7 @@ export class ShellService {
       this.nodes.forEach(async (node) => {
         node.general = await this.generalInfo(node.host)
         node.geoIp = await this.geoIpInfo(node.host)
+        node.docker = await this.docker(node.host)
       });
 
     } catch (error) {
@@ -53,6 +54,12 @@ export class ShellService {
       }, 1000);
     }
 
+  }
+
+  public async docker(host: string) {
+    return this.http.get<GeneralSysInfo>
+      (environment.api + `/api/v1/sysinfo/${host}/docker`)
+      .toPromise();
   }
 
   selectNode(host: string) {

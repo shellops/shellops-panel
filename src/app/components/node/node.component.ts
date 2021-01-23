@@ -7,9 +7,20 @@ import { ShellNode } from '../../interfaces/shell-node.interface';
   templateUrl: './node.component.html',
   styleUrls: ['./node.component.scss']
 })
-export class NodeComponent   {
+export class NodeComponent {
+
+
+  public get tab(): string {
+    return localStorage.tab
+  }
+
+
+  public set tab(v: string) {
+    localStorage.setItem('tab', v);
+  }
+
 
   @Input()
   model: ShellNode;
-  
+
 }
