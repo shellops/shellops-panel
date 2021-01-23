@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
 @import "reset.scss";
 
@@ -10,15 +9,6 @@ body {
   background: #000;
 }
 
-.logo {
-  font-family: "Turret Road", cursive;
-  font-weight: 300;
-  font-size: 21px;
-  color: #fff;
-  border-bottom: 1px solid #ccc;
-  width: 200px;
-}
-
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -26,34 +16,6 @@ body {
 
 .invert {
   filter: invert(1);
-}
-.page {
-  padding: 30px;
-}
-
-aside {
-  display: inline-block;
-  vertical-align: top;
-  text-align: center;
-  width: 480px;
-  padding: 40px;
-  padding-right: 15px;
-  box-sizing: border-box;
-
-  &.second {
-    padding: 0;
-    width: calc(100% - 480px);
-  }
-}
-
-.map {
-  margin: 45px auto;
-
-  img {
-    width: 75%;
-    margin: 0 auto;
-    display: block;
-  }
 }
 
 .box {
@@ -74,45 +36,6 @@ aside {
     border: none;
     border-bottom: 1px solid #777;
     background: none;
-  }
-
-  table {
-    width: 100%;
-    line-height: 24px;
-    tr:nth-child(2n) {
-      background: #222;
-    }
-
-    tr{
-      cursor: pointer;
-    }
-
-    tr.selected {
-      td {
-        color: #fff;
-      }
-    }
-
-    th,
-    td {
-      padding: 5px;
-    }
-    th {
-      color: #ccc;
-      text-align: start;
-      font-weight: bold;
-      border-bottom: 1px solid #777;
-    }
-    td {
-      font-size: 11px;
-      color: #eee;
-
-      img {
-        display: inline-block;
-        vertical-align: middle;
-        height: 20px;
-      }
-    }
   }
 
   .actions {
@@ -169,8 +92,6 @@ aside {
     }
   }
 
-  table {
-  }
   ul {
     li {
       font-size: 13px;
@@ -233,6 +154,46 @@ aside {
           font-size: 9px;
         }
       }
+    }
+  }
+}
+
+
+table {
+  width: 100%;
+  line-height: 24px;
+  tr:nth-child(2n) {
+    background: #222;
+  }
+
+  tr {
+    cursor: pointer;
+  }
+
+  tr.selected {
+    td {
+      color: #fff;
+    }
+  }
+
+  th,
+  td {
+    padding: 5px;
+  }
+  th {
+    color: #ccc;
+    text-align: start;
+    font-weight: bold;
+    border-bottom: 1px solid #777;
+  }
+  td {
+    font-size: 11px;
+    color: #eee;
+
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      height: 20px;
     }
   }
 }

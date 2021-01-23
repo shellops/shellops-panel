@@ -1,0 +1,28 @@
+aside {
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  width: 480px;
+  padding: 40px;
+  padding-right: 15px;
+  box-sizing: border-box;
+
+  &.second {
+    padding: 0;
+    width: calc(100% - 480px);
+  }
+}
+
+.map {
+  margin: 45px auto;
+
+  img {
+    width: 75%;
+    margin: 0 auto;
+    display: block;
+  }
+}
+
+.page {
+  padding: 30px;
+}
