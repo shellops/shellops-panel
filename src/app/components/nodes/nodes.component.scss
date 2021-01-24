@@ -1,0 +1,28 @@
+.node-card {
+  max-width: 220px;
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  text-align: start;
+  padding: 15px;
+  border-radius: 15px;
+  line-height: 18px;
+  cursor: pointer;
+
+  ul {
+    padding-left: 30px;
+    li {
+      margin-bottom: 5px;
+    }
+  }
+  .title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    img {
+      display: inline-block;
+      vertical-align: middle;
+      width: 20px;
+      margin-right: 2px;
+    }
+  }
+}
