@@ -13,12 +13,17 @@
 
   <div class="actions">
 
-    <button [class.active]="tab === 'general'" (click)="tab = 'general'">
+    <button [class.active]="shellService.tab === 'general'" (click)="shellService.tab = 'general'">
       <img src="assets/icons/solid/info-circle.svg" alt="">
       Info
     </button>
 
-    <button [class.active]="tab === 'docker'" (click)="tab = 'docker'">
+    <button [class.active]="shellService.tab === 'console'" (click)="shellService.tab = 'console'">
+      <img src="assets/icons/solid/terminal.svg" alt="">
+      Console
+    </button>
+
+    <button [class.active]="shellService.tab === 'docker'" (click)="shellService.tab = 'docker'">
       <img src="assets/icons/brands/docker.svg" alt="">
       Docker
     </button>
@@ -56,7 +61,8 @@
     <app-loading></app-loading>
   </div>
 
-  <app-node-info [model]="model" *ngIf="tab === 'general' && model?.general?.os"></app-node-info>
-  <app-node-docker [model]="model" *ngIf="tab === 'docker' && model?.general?.os"></app-node-docker>
+  <app-console [model]="model" *ngIf="shellService.tab === 'console'"></app-console>
+  <app-node-info [model]="model" *ngIf="shellService.tab === 'general' && model?.general?.os"></app-node-info>
+  <app-node-docker [model]="model" *ngIf="shellService.tab === 'docker' && model?.general?.os"></app-node-docker>
 
 </div>

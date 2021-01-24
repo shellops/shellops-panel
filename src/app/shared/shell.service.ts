@@ -13,6 +13,14 @@ export class ShellService {
 
   public nodes: ShellNode[];
 
+  public get tab(): string {
+    return localStorage.tab
+  }
+
+  public set tab(v: string) {
+    localStorage.setItem('tab', v);
+  }
+
   constructor(
     private readonly wsService: WsService,
     private readonly http: HttpClient) {
@@ -30,7 +38,6 @@ export class ShellService {
 
     this.wsService.events.subscribe((next) => {
 
-      console.log(next);
 
     });
 
@@ -40,7 +47,9 @@ export class ShellService {
 
     try {
 
-      this.nodes = [{ host: 'localhost', selected: true }, ... await this.http.get<any>(environment.api + '/api/v1/nodes').toPromise()];
+      this.nodes = [
+        ... await this.http.get<any>(environment.api + '/api/v1/nodes').toPromise()
+      ];
 
       this.nodes.forEach(async (node) => {
         node.general = await this.generalInfo(node.host)
@@ -74,7 +83,7 @@ export class ShellService {
   public async installDocker(host: string) {
 
     return this.http.post
-      (environment.api + `/api/v1/shell/${host}/docker/install`, {})
+      (environment.api + `/api/v1/shell/${host}/docker`, {})
       .toPromise();
 
   }
@@ -82,9 +91,11 @@ export class ShellService {
 
   public async uninstallDocker(host: string) {
 
-    return this.http.delete
-      (environment.api + `/api/v1/shell/${host}/docker/install`, {})
+    await this.http.delete
+      (environment.api + `/api/v1/shell/${host}/docker`, {})
       .toPromise();
+
+    await this.loadNodes();
 
   }
 

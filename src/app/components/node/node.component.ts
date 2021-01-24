@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 import { ShellNode } from '../../interfaces/shell-node.interface';
+import { ShellService } from '../../shared/shell.service';
 
 @Component({
   selector: 'app-node',
@@ -9,16 +10,7 @@ import { ShellNode } from '../../interfaces/shell-node.interface';
 })
 export class NodeComponent {
 
-
-  public get tab(): string {
-    return localStorage.tab
-  }
-
-
-  public set tab(v: string) {
-    localStorage.setItem('tab', v);
-  }
-
+  constructor(public readonly shellService: ShellService) { }
 
   @Input()
   model: ShellNode;
