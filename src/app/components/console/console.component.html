@@ -1,0 +1,21 @@
+<div class="console">
+    <div class="command" *ngFor="let item of history">
+        {{item.command}}
+        <div class="logs">
+            <div [class.error]="log.type === 'error'" [class.info]="log.type === 'info'" *ngFor="let log of item?.logs">
+                {{log.output}}
+            </div>
+        </div>
+    </div>
+
+    <div class="command" *ngIf="current">
+        {{current?.command}}
+
+        <div class="logs">
+            <div class="log" [class.error]="log.type === 'error'" [class.info]="log.type === 'info'"
+                *ngFor="let log of current?.logs">
+                {{log.output}}
+            </div>
+        </div>
+    </div>
+</div>

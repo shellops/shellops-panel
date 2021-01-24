@@ -1,0 +1,29 @@
+.console {
+  background: #000;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: monospace;
+  padding: 10px;
+  height: 400px;
+  margin: 15px 0;
+  font-size: 11px;
+  line-height: 16px;
+
+  .command {
+    margin: 5px 0;
+    padding: 0;
+
+    .log {
+      margin: 5px 0;
+
+      padding: 0;
+      &.info {
+        color: #ccc;
+      }
+
+      &.error {
+        color: #ff0000;
+      }
+    }
+  }
+}

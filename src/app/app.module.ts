@@ -19,6 +19,7 @@ import { NodesComponent } from './components/nodes/nodes.component';
 import { NodeInfoComponent } from './components/node/node-info/node-info.component';
 import { LoadingComponent } from './layout/loading/loading.component';
 import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
+import { ConsoleComponent } from './components/console/console.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { NodeDockerComponent } from './components/node/node-docker/node-docker.c
     NodeInfoComponent,
     LoadingComponent,
     NodeDockerComponent,
+    ConsoleComponent,
   ],
   imports: [
     NgPipesModule,
