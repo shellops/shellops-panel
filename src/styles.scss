@@ -31,6 +31,10 @@ body {
   text-align: start;
   color: #999;
 
+  section {
+    padding: 15px;
+  }
+
   hr {
     margin: 15px auto;
     border: none;
@@ -201,6 +205,18 @@ table {
   }
 }
 
+button {
+  margin: 15px 0;
+  padding: 5px 10px;
+  background: none;
+  border: 1px solid #ccc;
+  color: #ccc;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+
 form {
   .form-field {
     margin: 0 0 10px 0;
@@ -234,19 +250,10 @@ form {
     line-height: 28px;
   }
 
-  button {
-    margin: 15px 0;
-    padding: 5px 10px;
-    background: none;
-    border: 1px solid #ccc;
-    color: #ccc;
-    font-weight: bold;
-    border-radius: 5px;
-    font-size: 11px;
-  }
 
   .links {
     margin: 0 5px;
     line-height: 24px;
   }
 }
+

@@ -70,6 +70,25 @@ export class ShellService {
   }
 
 
+
+  public async installDocker(host: string) {
+
+    return this.http.post
+      (environment.api + `/api/v1/shell/${host}/docker/install`, {})
+      .toPromise();
+
+  }
+
+
+  public async uninstallDocker(host: string) {
+
+    return this.http.delete
+      (environment.api + `/api/v1/shell/${host}/docker/install`, {})
+      .toPromise();
+
+  }
+
+
   public async generalInfo(host: string) {
 
     return this.http.get<GeneralSysInfo>

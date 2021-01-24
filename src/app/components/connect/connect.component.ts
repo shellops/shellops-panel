@@ -23,7 +23,7 @@ export class ConnectComponent implements OnInit {
 
   async addNewShell() {
 
-    await this.http.post<any>(environment + '/api/v1/node', this.newShell).toPromise();
+    await this.http.post<any>(environment.api + '/api/v1/node', this.newShell).toPromise();
 
     // await this.loadNodes();
 

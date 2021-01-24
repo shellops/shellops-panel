@@ -1,4 +1,10 @@
 <div *ngIf="model?.general?.versions?.docker">
+
+    <button (click)="installDocker()">
+        Uninstall docker
+    </button>
+
+
     <ul>
         <li>
             Version: {{model?.general?.versions?.docker}}
@@ -27,7 +33,7 @@
                 <li>
                     Started At: <span>{{container.startedAt | date}}</span>
                 </li>
-                
+
             </ul>
         </li>
 
@@ -35,6 +41,9 @@
 </div>
 
 
-<div *ngIf="!model?.general?.versions?.docker">
-    Install docker
-</div>
+<section *ngIf="!model?.general?.versions?.docker">
+    <button (click)="installDocker()">
+        Install docker
+    </button>
+
+</section>
