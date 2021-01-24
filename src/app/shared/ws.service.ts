@@ -1,11 +1,13 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
+import { WsPayload } from '../interfaces/ws-payload.interface';
+
 @Injectable({
   providedIn: 'root'
 })
 export class WsService {
 
-  events = new EventEmitter();
+  events = new EventEmitter<WsPayload>();
 
   constructor() {
 
@@ -35,7 +37,6 @@ export class WsService {
 
       ws.onmessage = (msg) => {
         const payload = JSON.parse(msg.data);
-        console.log(payload.data?.host, payload.data?.output || payload.data?.error)
         this.events.emit(payload);
       };
 
