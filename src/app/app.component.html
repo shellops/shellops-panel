@@ -1,6 +1,6 @@
 <div class="page">
 
-  <app-header></app-header>
+  <app-header *ngIf="!shellService.selectedNode"></app-header>
 
   <div class="container" *ngIf="shellService.selectedNode">
     <app-node [model]="shellService.selectedNode"></app-node>
