@@ -1,4 +1,4 @@
-<div *ngIf="model?.general?.versions?.docker">
+<div *ngIf="model?.general?.versions?.docker" class="box">
 
     <button (click)="uninstallDocker()">
         Uninstall docker
@@ -10,12 +10,28 @@
             Version: {{model?.general?.versions?.docker}}
         </li>
 
-        <li *ngFor="let container of model?.docker?.containers">
-            Container:
-            <span>
+
+
+        <div *ngFor="let container of containers" class="container">
+
+            <div class="title">
+
+                <img *ngIf="container.showLogo" [src]="'assets/logos/' + container.name.toLowerCase() + '-original.svg'"
+                    alt="">
+
+                <img class="invert" *ngIf="!container.showLogo && container.icon"
+                    [src]="'assets/icons/solid/' + container.icon + '.svg'" alt="">
+
                 {{container.name}}
-            </span>
-            <ul>
+
+            </div>
+
+
+            <button *ngIf="!container.installed">
+                Install
+            </button>
+
+            <ul *ngIf="container.installed">
                 <li>
                     Image: <span>{{container.image}}</span>
                 </li>
@@ -47,15 +63,22 @@
                 </li>
 
             </ul>
-        </li>
+        </div>
 
     </ul>
 </div>
 
 
-<section *ngIf="!model?.general?.versions?.docker">
-    <button (click)="installDocker()">
-        Install docker
-    </button>
+<div class="box" *ngIf="!model?.general?.versions?.docker">
 
-</section>
+    <div class="install">
+        <button (click)="installDocker()">
+            Install docker
+        </button>
+
+        <p>
+            Docker enables you to run applications on isolated environment on your remote servers.
+        </p>
+    </div>
+
+</div>
