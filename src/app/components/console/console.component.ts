@@ -1,16 +1,17 @@
 import { ThrowStmt } from '@angular/compiler';
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ShellNode } from '../../interfaces/shell-node.interface';
 import { WsPayload } from '../../interfaces/ws-payload.interface';
 import { WsService } from '../../shared/ws.service';
-
+import * as AnsiConverter from "ansi-to-html";
+import { DomSanitizer } from '@angular/platform-browser';
 
 interface ConsoleCommand {
   command: string,
   logs: {
     date: Date,
-    output: string,
+    output: string | any,
     type: 'info' | 'error'
   }[],
 }
@@ -22,17 +23,22 @@ interface ConsoleCommand {
 })
 export class ConsoleComponent implements OnInit, OnDestroy {
 
+  ansiCoverter = new AnsiConverter();
+
+  @ViewChild('console') consoleRef: { nativeElement: HTMLElement };
 
   @Input()
   model: ShellNode;
-  
+
   wsSub: Subscription;
 
   history: ConsoleCommand[] = [];
 
   current: ConsoleCommand;
 
-  constructor(private readonly wsService: WsService) { }
+  constructor(
+    private readonly sanitizer: DomSanitizer,
+    private readonly wsService: WsService) { }
 
 
   ngOnInit(): void {
@@ -56,17 +62,23 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         this.current.logs.push({
           type: 'error',
           date: new Date(),
-          output: next.data.error
+          output: this.sanitizer.bypassSecurityTrustHtml(
+            this.ansiCoverter.toHtml(next.data.error)
+          )
         });
 
       if (next.data.output)
         this.current.logs.push({
           type: 'info',
           date: new Date(),
-          output: next.data.output
+          output: this.sanitizer.bypassSecurityTrustHtml(
+            this.ansiCoverter.toHtml(next.data.output)
+          )
         });
 
-
+      this.consoleRef.nativeElement.scrollTo({
+        top: this.consoleRef.nativeElement.scrollHeight + 100
+      })
 
     });
 

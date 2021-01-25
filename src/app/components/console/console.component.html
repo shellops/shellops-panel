@@ -1,9 +1,8 @@
-<div class="console">
+<div class="console" #console>
     <div class="command" *ngFor="let item of history">
         {{item.command}}
         <div class="logs">
-            <div [class.error]="log.type === 'error'" [class.info]="log.type === 'info'" *ngFor="let log of item?.logs">
-                {{log.output}}
+            <div  [innerHTML]="log.output"  [class.error]="log.type === 'error'" [class.info]="log.type === 'info'" *ngFor="let log of item?.logs">
             </div>
         </div>
     </div>
@@ -13,8 +12,7 @@
 
         <div class="logs">
             <div class="log" [class.error]="log.type === 'error'" [class.info]="log.type === 'info'"
-                *ngFor="let log of current?.logs">
-                {{log.output}}
+            [innerHTML]="log.output"    *ngFor="let log of current?.logs">
             </div>
         </div>
     </div>
