@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { timeStamp } from 'console';
 import { environment } from '../../environments/environment';
 import { GeneralSysInfo } from '../interfaces/general-sys-info.interface';
 import { GeoIpSysInfo } from '../interfaces/geoip-sys-info.interface';
@@ -45,6 +46,11 @@ export class ShellService {
 
   }
 
+  async deleteNode(host: string) {
+    await this.http.delete<ShellNode[]>(environment.api + '/api/v1/nodes/' + host).toPromise();
+    await this.loadNodes();
+  }
+
   async loadNodes() {
 
     this.nodes = this.nodes || JSON.parse(localStorage.getItem('nodes') || '[]');
@@ -52,18 +58,21 @@ export class ShellService {
     try {
 
       const newList = await this.http.get<ShellNode[]>(environment.api + '/api/v1/nodes').toPromise();
-      if (!this.nodes)
+      if (!this.nodes?.length)
         this.nodes = newList;
       else
-        this.nodes.forEach(node => {
+        this.nodes.forEach((node, i) => {
           const existing = newList.find(p => p.host === node.host);
           if (existing)
             Object.assign(node, existing);
           else
-            node = null;
+            this.nodes[i] = null;
         });
 
+
       this.nodes.concat(newList.filter(n => !this.nodes.find(p => p.host === n.host)));
+
+      this.nodes = this.nodes.filter(p => p);
 
       this.nodes.forEach(async (node) => {
         node.general = await this.generalInfo(node.host)
@@ -71,7 +80,6 @@ export class ShellService {
         node.docker = await this.docker(node.host)
       });
 
-      this.nodes = this.nodes.filter(p => p);
 
       this.saveNodes();
 
@@ -105,6 +113,14 @@ export class ShellService {
 
     return this.http.post
       (environment.api + `/api/v1/shell/${host}/docker`, {})
+      .toPromise();
+
+  }
+
+  public async installPoste(host: string) {
+
+    return this.http.post
+      (environment.api + `/api/v1/shell/${host}/poste`, {})
       .toPromise();
 
   }

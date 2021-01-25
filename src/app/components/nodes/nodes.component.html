@@ -2,6 +2,10 @@
     [class.selected]="node.selected">
 
 
+
+    <div (click)="shellService.deleteNode(node.host)" class="trash">
+        <img class="invert" src="assets/icons/solid/trash.svg" alt="">
+    </div>
     <div class="title">
 
         <img
