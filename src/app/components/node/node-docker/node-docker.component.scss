@@ -1,5 +1,14 @@
-.container{
-    display: inline-block;
-    width:200px;
-    vertical-align: top;
+.app {
+  display: inline-block;
+  width: 220px;
+  vertical-align: top;
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 15px;
+
+  p {
+    padding: 10px;
+    min-height: 60px;
+  }
 }

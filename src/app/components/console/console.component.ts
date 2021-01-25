@@ -29,8 +29,6 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
   @ViewChild('console') consoleRef: { nativeElement: HTMLElement };
 
-
-
   public get model(): ShellNode {
     return this.shellService.selectedNode;
   }
@@ -82,9 +80,11 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         this.current.logs.push(payload);
 
 
-      this.consoleRef.nativeElement.scrollTo({
-        top: this.consoleRef.nativeElement.scrollHeight + 100
-      })
+      setTimeout(() => {
+        this.consoleRef.nativeElement.scrollTo({
+          top: this.consoleRef.nativeElement.scrollHeight
+        })
+      }, 100);
 
     });
 

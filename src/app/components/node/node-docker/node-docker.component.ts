@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { async } from '@angular/core/testing';
 import { Router } from '@angular/router';
 
 import { ShellNode } from '../../../interfaces/shell-node.interface';
@@ -22,7 +23,15 @@ export class NodeDockerComponent implements OnInit {
       name: 'Poste',
       description: 'Self hosted Mailserver',
       icon: 'mail-bulk',
-      showLogo: false
+      showLogo: false,
+      install: async()=>{
+        this.router.navigate(['/nodes', this.model.host, 'console'])
+        await this.shellService.installPoste(this.model.host);
+        await this.shellService.loadNodes();
+        setTimeout(() => {
+          this.router.navigate(['/nodes', this.model.host, 'docker'])
+        }, 3000);
+      }
     },
     {
       name: 'Traefik',
@@ -69,7 +78,7 @@ export class NodeDockerComponent implements OnInit {
     this.router.navigate(['/nodes', this.model.host, 'console'])
     await this.shellService.uninstallDocker(this.model.host);
     await this.shellService.loadNodes();;
-    this.router.navigate(['/nodes', this.model.host, 'general'])
+    this.router.navigate(['/nodes', this.model.host, 'docker'])
   }
 
 }
