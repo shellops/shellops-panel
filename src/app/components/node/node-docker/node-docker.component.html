@@ -34,6 +34,18 @@
                     Started At: <span>{{container.startedAt | date}}</span>
                 </li>
 
+                <li>
+                    Ports:
+                    <ul>
+                        <li *ngFor="let item of container.ports">
+                            local
+                            <span> {{item.PrivatePort}} </span> ->
+                            public
+                            <span> {{item.PublicPort || 'N/A'}}</span>
+                        </li>
+                    </ul>
+                </li>
+
             </ul>
         </li>
 
