@@ -1,4 +1,4 @@
-<div class="box">
+<div class="box node">
 
   <div class="title">
 
@@ -12,6 +12,11 @@
   </div>
 
   <div class="actions">
+
+    <button (click)="model.selected = false">
+      <img src="assets/icons/solid/chevron-circle-left.svg" alt="">
+      Back
+    </button>
 
     <button [class.active]="shellService.tab === 'general'" (click)="shellService.tab = 'general'">
       <img src="assets/icons/solid/info-circle.svg" alt="">
