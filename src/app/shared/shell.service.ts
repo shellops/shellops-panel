@@ -24,10 +24,12 @@ export class ShellService {
   constructor(
     private readonly wsService: WsService,
     private readonly http: HttpClient) {
-
     this.loadNodes();
     this.subscribeToWs();
+  }
 
+  saveNodes() {
+    localStorage.setItem('nodes', JSON.stringify(this.nodes));
   }
 
   get selectedNode() {
@@ -45,17 +47,33 @@ export class ShellService {
 
   async loadNodes() {
 
+    this.nodes = this.nodes || JSON.parse(localStorage.getItem('nodes') || '[]');
+
     try {
 
-      this.nodes = [
-        ... await this.http.get<any>(environment.api + '/api/v1/nodes').toPromise()
-      ];
+      const newList = await this.http.get<ShellNode[]>(environment.api + '/api/v1/nodes').toPromise();
+      if (!this.nodes)
+        this.nodes = newList;
+      else
+        this.nodes.forEach(node => {
+          const existing = newList.find(p => p.host === node.host);
+          if (existing)
+            Object.assign(node, existing);
+          else
+            node = null;
+        });
+
+      this.nodes.concat(newList.filter(n => !this.nodes.find(p => p.host === n.host)));
 
       this.nodes.forEach(async (node) => {
         node.general = await this.generalInfo(node.host)
         node.geoIp = await this.geoIpInfo(node.host)
         node.docker = await this.docker(node.host)
       });
+
+      this.nodes = this.nodes.filter(p => p);
+
+      this.saveNodes();
 
     } catch (error) {
       setTimeout(() => {
@@ -76,6 +94,9 @@ export class ShellService {
       this.nodes.forEach(node => node.selected = false);
       this.nodes.find(p => p.host === host).selected = true;
     }
+
+    this.saveNodes();
+
   }
 
 
