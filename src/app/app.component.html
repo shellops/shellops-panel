@@ -1,34 +1,16 @@
 <div class="page">
 
-  <app-header *ngIf="!shellService.selectedNode"></app-header>
+  <app-header></app-header>
 
-  <div class="container" *ngIf="shellService.selectedNode">
+  <!-- <div class="container" *ngIf="shellService.selectedNode">
     <app-node [model]="shellService.selectedNode"></app-node>
   </div>
+ -->
 
-  <div class="container" *ngIf="!shellService.selectedNode">
 
-    <aside>
-      <app-connect></app-connect>
-      <app-nodes></app-nodes>
+  <div class="container">
 
-    </aside>
-
-    <aside class="second">
-      <div class="map">
-        <img src="http://localhost:3000/api/v1/sysinfo/local/location.svg" alt="">
-      </div>
-
-    </aside>
+    <router-outlet></router-outlet>
 
   </div>
-
-
-
-  <router-outlet></router-outlet>
-
-
-
-
-
 </div>

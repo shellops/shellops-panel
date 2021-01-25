@@ -13,6 +13,10 @@ export class NodePosteComponent implements OnInit {
   model: ShellNode;
 
 
+  get poste() {
+    return this.model.docker.containers.find(p => p.name === 'poste')
+  }
+
   constructor(public readonly shellService: ShellService) { }
 
   ngOnInit(): void { }
@@ -22,6 +26,10 @@ export class NodePosteComponent implements OnInit {
     await this.shellService.installPoste(this.model.host);
     await this.shellService.loadNodes();;
     this.shellService.tab = 'mail';
+  }
+
+  async uninstallPoste(){
+    
   }
 
 

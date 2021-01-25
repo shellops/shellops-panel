@@ -1,11 +1,8 @@
-<div class="node-card" *ngFor="let node of shellService.nodes" (click)="shellService.selectNode(node.host)"
-    [class.selected]="node.selected">
+<div class="node-card" *ngFor="let node of shellService.nodes" [routerLink]="'/nodes/' + node.host + '/info'">
 
 
-
-    <div (click)="shellService.deleteNode(node.host)" class="trash">
-        <img class="invert" src="assets/icons/solid/trash.svg" alt="">
-    </div>
+   
+    
     <div class="title">
 
         <img

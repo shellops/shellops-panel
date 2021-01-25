@@ -2,17 +2,21 @@ import { Component, Input } from '@angular/core';
 import { pick } from 'lodash';
 
 import { ShellNode } from '../../../interfaces/shell-node.interface';
+import { ShellService } from '../../../shared/shell.service';
 
 @Component({
   selector: 'app-node-info',
   templateUrl: './node-info.component.html',
   styleUrls: ['./node-info.component.scss']
 })
-export class NodeInfoComponent   {
+export class NodeInfoComponent {
 
+  constructor(public readonly shellService: ShellService) { }
 
-  @Input()
-  model: ShellNode;
+  public get model(): ShellNode {
+    return this.shellService.selectedNode;
+  }
+
 
   get appVersions() {
     return pick(this.model?.general?.versions || {},

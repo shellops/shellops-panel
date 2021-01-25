@@ -1,9 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { pick } from 'lodash';
-import { GeneralSysInfo } from './interfaces/general-sys-info.interface';
-import { GeoIpSysInfo } from './interfaces/geoip-sys-info.interface';
+import { Component } from '@angular/core';
+
 import { ShellService } from './shared/shell.service';
+import { UiService } from './shared/ui.service';
 
 
 @Component({
@@ -13,6 +11,6 @@ import { ShellService } from './shared/shell.service';
 })
 export class AppComponent {
 
-  constructor(public readonly shellService: ShellService) { }
+  constructor(public readonly shellService: ShellService, public readonly uiService: UiService) { }
 
 }

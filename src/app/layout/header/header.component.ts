@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ShellService } from '../../shared/shell.service';
+import { UiService } from '../../shared/ui.service';
 
 @Component({
   selector: 'app-header',
@@ -7,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public readonly uiService: UiService,
+    public readonly shellService: ShellService) { }
 
   ngOnInit(): void {
   }

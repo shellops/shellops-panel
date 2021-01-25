@@ -21,6 +21,8 @@ import { LoadingComponent } from './layout/loading/loading.component';
 import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
 import { ConsoleComponent } from './components/console/console.component';
 import { NodePosteComponent } from './components/node/node-poste/node-poste.component';
+import { StartComponent } from './pages/start/start.component';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { NodePosteComponent } from './components/node/node-poste/node-poste.comp
     NodeDockerComponent,
     ConsoleComponent,
     NodePosteComponent,
+    StartComponent,
+    NotFoundComponent,
   ],
   imports: [
     NgPipesModule,

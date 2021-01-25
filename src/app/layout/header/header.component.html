@@ -1,8 +1,75 @@
+<header>
+  <div class="container">
 
-  <header>
-
-    <div class="container">
-      <app-logo></app-logo>
+    <div class="logo-wrapper">
+      <app-logo *ngIf="!uiService.params?.host"></app-logo>
     </div>
+    <ul *ngIf="uiService.params?.host">
 
-  </header>
+
+      <li routerLink="/">
+        <img src="assets/icons/solid/chevron-left.svg" alt="">
+
+      </li>
+
+      <li class="host">
+        <img *ngIf="this.shellService.selectedNode?.general?.os?.distro?.toLowerCase() === 'ubuntu'"
+          src="assets/logos/ubuntu-original.svg" alt="">
+        <img *ngIf="this.shellService.selectedNode?.general?.os?.distro?.toLowerCase() === 'redhat'"
+          src="assets/logos/redhat-original.svg" alt="">
+        <img *ngIf="this.shellService.selectedNode?.general?.os?.platform?.toLowerCase() === 'windows'"
+          src="assets/logos/windows-original.svg" alt="">
+        {{this.shellService.selectedNode?.general?.system?.version}}
+        {{this.shellService.selectedNode?.general?.system?.virtual ? '(VIRTUAL)': ''}}
+        - {{this.shellService.selectedNode?.host}}
+      </li>
+
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/info'" [routerLinkActive]="'active'"
+        (click)="shellService.tab = 'general'">
+        <img src="assets/icons/solid/info-circle.svg" alt="">
+        Info
+      </li>
+
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/docker'" [routerLinkActive]="'active'">
+        <img src="assets/icons/brands/docker.svg" alt="">
+        Docker
+      </li>
+
+      <li (click)="shellService.tab = 'console'">
+        <img src="assets/icons/solid/laptop-code.svg" alt="">
+        Console
+      </li>
+      <!-- 
+      <button [class.active]="shellService.tab === 'mail'" (click)="shellService.tab = 'mail'">
+        <img src="assets/icons/solid/mail-bulk.svg" alt="">
+        Mailing
+      </button>
+  
+      <button>
+        <img src="assets/icons/solid/download.svg" alt="">
+        Backup
+      </button>
+  
+      <button>
+        <img src="assets/icons/solid/network-wired.svg" alt="">
+        Network
+      </button>
+  
+      <button>
+        <img src="assets/icons/solid/shield-alt.svg" alt="">
+        Firewall
+      </button>
+  
+      <button>
+        <img src="assets/icons/solid/fire-extinguisher.svg" alt="">
+        Alerting
+      </button> -->
+
+
+    </ul>
+  </div>
+
+
+
+
+</header>

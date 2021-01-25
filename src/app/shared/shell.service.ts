@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { GeneralSysInfo } from '../interfaces/general-sys-info.interface';
 import { GeoIpSysInfo } from '../interfaces/geoip-sys-info.interface';
 import { ShellNode } from '../interfaces/shell-node.interface';
+import { UiService } from './ui.service';
 import { WsService } from './ws.service';
 
 @Injectable({
@@ -14,15 +15,8 @@ export class ShellService {
 
   public nodes: ShellNode[];
 
-  public get tab(): string {
-    return localStorage.tab
-  }
-
-  public set tab(v: string) {
-    localStorage.setItem('tab', v);
-  }
-
   constructor(
+    private readonly uiService: UiService,
     private readonly wsService: WsService,
     private readonly http: HttpClient) {
     this.loadNodes();
@@ -34,7 +28,7 @@ export class ShellService {
   }
 
   get selectedNode() {
-    return this.nodes?.find(p => p.selected)
+    return this.nodes?.find(p => p.host && p.host === this.uiService.params?.host)
   }
 
   async subscribeToWs() {
@@ -96,18 +90,6 @@ export class ShellService {
       (environment.api + `/api/v1/sysinfo/${host}/docker`)
       .toPromise();
   }
-
-  selectNode(host: string) {
-    if (this.nodes.find(p => p.host === host)) {
-      this.nodes.forEach(node => node.selected = false);
-      this.nodes.find(p => p.host === host).selected = true;
-    }
-
-    this.saveNodes();
-
-  }
-
-
 
   public async installDocker(host: string) {
 

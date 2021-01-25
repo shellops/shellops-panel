@@ -1,3 +1,52 @@
-header{
+header {
+  .logo-wrapper {
     margin-bottom: 30px;
+  }
+}
+
+ul {
+  background: #fff;
+  background: #444;
+  border-right: none;
+  line-height: 40px;
+  padding: 0 10px;
+
+  li {
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    background: none;
+    padding: 0 10px;
+    text-align: center;
+    color: #aeaeae;
+    display: inline-block;
+    border-right: 1px solid #333;
+    cursor: default;
+    outline: none;
+    user-select: none;
+
+    &.active {
+      background: #333;
+    }
+
+    &:last-child {
+      border-right: none;
+    }
+
+    img {
+      opacity: 0.7;
+      height: 16px;
+      margin: 0 auto;
+      display: inline-block;
+      vertical-align: middle;
+      filter: invert(1);
+    }
+
+    &.host {
+      img {
+        filter: none;
+        opacity: 1;
+      }
+    }
+  }
 }

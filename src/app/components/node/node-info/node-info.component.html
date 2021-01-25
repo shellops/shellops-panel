@@ -1,4 +1,4 @@
-
+<div class="box">
   <ul>
     <li>
       OS:
@@ -114,4 +114,15 @@
       </div>
 
     </li>
+
+    <li class="actions">
+      <div class="icon">
+        <img (click)="shellService.deleteNode(model.host);" routerLink="/" class="trash" class="invert"
+          src="assets/icons/solid/trash.svg" alt="">
+        <span>Remove node</span>
+      </div>
+    </li>
+
   </ul>
+
+</div>

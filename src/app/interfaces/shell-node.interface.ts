@@ -3,7 +3,6 @@ import { GeoIpSysInfo } from "./geoip-sys-info.interface";
 
 export interface ShellNode {
     docker: any;
-    selected: boolean;
 
     host: string;
 
