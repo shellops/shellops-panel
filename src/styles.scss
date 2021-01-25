@@ -3,6 +3,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap");
 @import "reset.scss";
 
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+
+  ::-webkit-scrollbar-track {
+    background: #333;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #777;
+  }
+}
+
 body {
   font-family: "Ubuntu Mono", monospace;
   font-size: 13px;
@@ -21,7 +34,6 @@ body {
 .box {
   width: 100%;
   border-radius: 0 15px 15px 15px;
-  margin-bottom: 30px;
   padding: 5px 10px 10px 10px;
   box-sizing: border-box;
   display: inline-block;
@@ -33,13 +45,6 @@ body {
 
   section {
     padding: 15px;
-  }
-
-  hr {
-    margin: 15px auto;
-    border: none;
-    border-bottom: 1px solid #777;
-    background: none;
   }
 
   .actions {
@@ -216,7 +221,6 @@ button {
   font-size: 11px;
 }
 
-
 form {
   .form-field {
     margin: 0 0 10px 0;
@@ -250,10 +254,8 @@ form {
     line-height: 28px;
   }
 
-
   .links {
     margin: 0 5px;
     line-height: 24px;
   }
 }
-
