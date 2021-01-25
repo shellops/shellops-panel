@@ -35,7 +35,7 @@
         Docker
       </li>
 
-      <li (click)="shellService.tab = 'console'">
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/console'" (click)="shellService.tab = 'console'">
         <img src="assets/icons/solid/laptop-code.svg" alt="">
         Console
       </li>

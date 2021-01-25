@@ -5,7 +5,6 @@ import { NgPipesModule } from 'ngx-pipes';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NodeComponent } from './components/node/node.component';
 import { HeaderComponent } from './layout/header/header.component';
 import { LogoComponent } from './layout/logo/logo.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -27,7 +26,6 @@ import { NotFoundComponent } from './layout/not-found/not-found.component';
 @NgModule({
   declarations: [
     AppComponent,
-    NodeComponent,
     HeaderComponent,
     LogoComponent,
     FooterComponent,

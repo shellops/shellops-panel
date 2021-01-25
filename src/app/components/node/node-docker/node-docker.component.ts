@@ -11,8 +11,11 @@ import { ShellService } from '../../../shared/shell.service';
 })
 export class NodeDockerComponent implements OnInit {
 
-  @Input()
-  model: ShellNode;
+
+  public get model(): ShellNode {
+    return this.shellService.selectedNode;
+  }
+
 
   apps = [
     {
@@ -53,8 +56,7 @@ export class NodeDockerComponent implements OnInit {
 
   constructor(public readonly shellService: ShellService, private readonly router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   async installDocker() {
     this.router.navigate(['/nodes', this.model.host, 'console'])

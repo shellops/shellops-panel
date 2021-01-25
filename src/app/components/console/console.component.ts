@@ -6,6 +6,7 @@ import { WsPayload } from '../../interfaces/ws-payload.interface';
 import { WsService } from '../../shared/ws.service';
 import * as AnsiConverter from "ansi-to-html";
 import { DomSanitizer } from '@angular/platform-browser';
+import { ShellService } from '../../shared/shell.service';
 
 interface ConsoleCommand {
   command: string,
@@ -28,8 +29,11 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
   @ViewChild('console') consoleRef: { nativeElement: HTMLElement };
 
-  @Input()
-  model: ShellNode;
+
+
+  public get model(): ShellNode {
+    return this.shellService.selectedNode;
+  }
 
   wsSub: Subscription;
 
@@ -38,6 +42,7 @@ export class ConsoleComponent implements OnInit, OnDestroy {
   current: ConsoleCommand;
 
   constructor(
+    private readonly shellService: ShellService,
     private readonly sanitizer: DomSanitizer,
     private readonly wsService: WsService) { }
 
