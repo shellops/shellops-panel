@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
+import { ShellService } from '../../shared/shell.service';
 
 @Component({
   selector: 'app-connect',
@@ -15,7 +16,7 @@ export class ConnectComponent implements OnInit {
     password: ''
   };
 
-  constructor(private readonly http: HttpClient) {
+  constructor(private readonly http: HttpClient, private readonly shellService: ShellService) {
 
   }
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class ConnectComponent implements OnInit {
 
     await this.http.post<any>(environment.api + '/api/v1/node', this.newShell).toPromise();
 
-    // await this.loadNodes();
+    await this.shellService.loadNodes();
 
     this.newShell = {
       host: '',

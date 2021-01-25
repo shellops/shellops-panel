@@ -10,9 +10,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 interface ConsoleCommand {
   command: string,
   logs: {
+    raw: string,
     date: Date,
     output: string | any,
-    type: 'info' | 'error'
+    type: string
   }[],
 }
 
@@ -47,6 +48,9 @@ export class ConsoleComponent implements OnInit, OnDestroy {
 
       // if (this.host && this.host === next.data.host) return;
 
+      if (this.current?.logs?.length && next.data.output === '\u001b')
+        return;
+
       if (this.current?.command !== next.data.command) {
 
         if (this.current?.command)
@@ -58,23 +62,20 @@ export class ConsoleComponent implements OnInit, OnDestroy {
         };
       }
 
-      if (next.data.error)
-        this.current.logs.push({
-          type: 'error',
-          date: new Date(),
-          output: this.sanitizer.bypassSecurityTrustHtml(
-            this.ansiCoverter.toHtml(next.data.error)
-          )
-        });
+      const payload = {
+        type: next.data.output ? 'info' : next.data.error ? 'error' : null,
+        date: new Date(),
+        raw: next.data.output || next.data.error,
+        output: this.sanitizer.bypassSecurityTrustHtml(
+          this.ansiCoverter.toHtml(next.data.output || next.data.error)
+        )
+      };
 
-      if (next.data.output)
-        this.current.logs.push({
-          type: 'info',
-          date: new Date(),
-          output: this.sanitizer.bypassSecurityTrustHtml(
-            this.ansiCoverter.toHtml(next.data.output)
-          )
-        });
+      if (this.current?.logs?.length && payload.raw.startsWith('\u001b'))
+        Object.assign(this.current.logs[this.current.logs.length - 1], payload)
+      else
+        this.current.logs.push(payload);
+
 
       this.consoleRef.nativeElement.scrollTo({
         top: this.consoleRef.nativeElement.scrollHeight + 100

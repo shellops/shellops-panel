@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { timeStamp } from 'console';
+
 import { environment } from '../../environments/environment';
 import { GeneralSysInfo } from '../interfaces/general-sys-info.interface';
 import { GeoIpSysInfo } from '../interfaces/geoip-sys-info.interface';

@@ -20,6 +20,7 @@ import { NodeInfoComponent } from './components/node/node-info/node-info.compone
 import { LoadingComponent } from './layout/loading/loading.component';
 import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
 import { ConsoleComponent } from './components/console/console.component';
+import { NodePosteComponent } from './components/node/node-poste/node-poste.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { ConsoleComponent } from './components/console/console.component';
     LoadingComponent,
     NodeDockerComponent,
     ConsoleComponent,
+    NodePosteComponent,
   ],
   imports: [
     NgPipesModule,
