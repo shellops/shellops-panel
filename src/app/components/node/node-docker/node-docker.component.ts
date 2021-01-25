@@ -15,15 +15,21 @@ export class NodeDockerComponent implements OnInit {
 
   constructor(public readonly shellService: ShellService) { }
 
-  ngOnInit(): void { 
-  }
-  
-  async installDocker(){
-    await this.shellService.installDocker(this.model.host);
+  ngOnInit(): void {
   }
 
-  async uninstallDocker(){
+  async installDocker() {
+    this.shellService.tab = 'console';
+    await this.shellService.installDocker(this.model.host);
+    await this.shellService.loadNodes();;
+    this.shellService.tab = 'docker';
+  }
+
+  async uninstallDocker() {
+    this.shellService.tab = 'console';
     await this.shellService.uninstallDocker(this.model.host);
+    await this.shellService.loadNodes();;
+    this.shellService.tab = 'general';
   }
 
 }
