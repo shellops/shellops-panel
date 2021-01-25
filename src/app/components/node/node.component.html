@@ -33,6 +33,11 @@
       Docker
     </button>
 
+    <button [class.active]="shellService.tab === 'mail'" (click)="shellService.tab = 'mail'">
+      <img src="assets/icons/solid/mail-bulk.svg" alt="">
+      Mailing
+    </button>
+
     <button>
       <img src="assets/icons/solid/download.svg" alt="">
       Backup
@@ -49,12 +54,6 @@
     </button>
 
     <button>
-      <img src="assets/icons/solid/mail-bulk.svg" alt="">
-      Mailing
-    </button>
-
-
-    <button>
       <img src="assets/icons/solid/fire-extinguisher.svg" alt="">
       Alerting
     </button>
@@ -69,5 +68,6 @@
   <app-console [model]="model" *ngIf="shellService.tab === 'console'"></app-console>
   <app-node-info [model]="model" *ngIf="shellService.tab === 'general' && model?.general?.os"></app-node-info>
   <app-node-docker [model]="model" *ngIf="shellService.tab === 'docker' && model?.general?.os"></app-node-docker>
+  <app-node-poste [model]="model" *ngIf="shellService.tab === 'mail' && model?.general?.os"></app-node-poste>
 
 </div>
