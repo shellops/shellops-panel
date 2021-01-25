@@ -5,7 +5,11 @@
   text-align: center;
   width: 100%;
 
-  app-loading{
-      margin:0 auto;
+  app-loading {
+    margin: 0 auto;
   }
+}
+
+.node {
+  min-height: calc(100vh - 90px);
 }
