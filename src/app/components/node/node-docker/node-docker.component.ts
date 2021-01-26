@@ -24,7 +24,7 @@ export class NodeDockerComponent implements OnInit {
       description: 'Self hosted Mailserver',
       icon: 'mail-bulk',
       showLogo: false,
-      install: async()=>{
+      install: async () => {
         this.router.navigate(['/nodes', this.model.host, 'console'])
         await this.shellService.installPoste(this.model.host);
         await this.shellService.loadNodes();
@@ -61,6 +61,10 @@ export class NodeDockerComponent implements OnInit {
 
     return containers;
 
+  }
+
+  getPublicPort(name: string, localPort: number) {
+    return this.containers.find(p => p.name === name)?.ports.find(p => p.PrivatePort === localPort)?.PublicPort
   }
 
   constructor(public readonly shellService: ShellService, private readonly router: Router) { }

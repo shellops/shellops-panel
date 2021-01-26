@@ -1,14 +1,21 @@
 .app {
   display: inline-block;
-  width: 220px;
+  width: 260px;
   vertical-align: top;
   background: #222;
   padding: 10px;
   border-radius: 10px;
   margin: 15px;
 
-  p {
+  p.desc {
     padding: 10px;
-    min-height: 60px;
+    line-height: 20px;
+    min-height: 40px;
+  }
+
+  .buttons {
+    button {
+      margin-right: 10px;
+    }
   }
 }

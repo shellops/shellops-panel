@@ -26,13 +26,31 @@
 
             </div>
 
-            <p>
+            <p class="desc">
                 {{container.description}}
+
             </p>
 
-            <button *ngIf="!container.installed" (click)="container.install()">
-                Install
-            </button>
+            <div class="buttons">
+
+                <button *ngIf="container.installed && container.name?.toLowerCase() === 'poste'">
+                    Admin Panel
+                </button>
+
+
+                <button *ngIf="container.installed && container.name?.toLowerCase() === 'poste'">
+                    Web Mail
+                </button>
+
+                <button *ngIf="!container.installed" (click)="container.install()">
+                    Install
+                </button>
+
+                <button *ngIf="container.installed" (click)="container.uninstall()">
+                    Uninstall
+                </button>
+            </div>
+
 
             <ul *ngIf="container.installed">
                 <li>
