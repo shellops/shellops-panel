@@ -1,58 +1,36 @@
 <div *ngIf="model?.general?.versions?.docker" class="box">
 
-    <button (click)="uninstallDocker()">
-        Uninstall docker
-    </button>
-
-
     <ul>
-        <li>
-            Version: {{model?.general?.versions?.docker}}
-        </li>
 
 
-
-        <div *ngFor="let container of containers" class="app">
+        <div *ngFor="let template of templates" class="app">
 
             <div class="title">
 
-                <img *ngIf="container.showLogo" [src]="'assets/logos/' + container.name.toLowerCase() + '-original.svg'"
-                    alt="">
+                <img *ngIf="template.logo" [src]="template.logo" alt="">
 
-                <img class="invert" *ngIf="!container.showLogo && container.icon"
-                    [src]="'assets/icons/solid/' + container.icon + '.svg'" alt="">
-
-                {{container.name}}
+                {{template.name}} {{template.version}}
 
             </div>
 
             <p class="desc">
-                {{container.description}}
+                {{template.description}}
 
             </p>
 
             <div class="buttons">
 
-                <button *ngIf="container.installed && container.name?.toLowerCase() === 'poste'">
-                    Admin Panel
-                </button>
-
-
-                <button *ngIf="container.installed && container.name?.toLowerCase() === 'poste'">
-                    Web Mail
-                </button>
-
-                <button *ngIf="!container.installed" (click)="container.install()">
+                <button (click)="installApp(template)">
                     Install
                 </button>
 
-                <button *ngIf="container.installed" (click)="container.uninstall()">
-                    Uninstall
-                </button>
+                <a *ngIf="template.website" [href]="template.website">Website</a>
+
+
             </div>
 
 
-            <ul *ngIf="container.installed">
+            <!-- <ul *ngIf="container.installed">
                 <li>
                     Image: <span>{{container.image}}</span>
                 </li>
@@ -83,23 +61,8 @@
                     </ul>
                 </li>
 
-            </ul>
+            </ul> -->
         </div>
 
     </ul>
-</div>
-
-
-<div class="box" *ngIf="!model?.general?.versions?.docker">
-
-    <div class="install">
-        <button (click)="installDocker()">
-            Install docker
-        </button>
-
-        <p>
-            Docker enables you to run applications on isolated environment on your remote servers.
-        </p>
-    </div>
-
 </div>

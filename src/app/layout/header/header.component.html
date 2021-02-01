@@ -21,7 +21,7 @@
           src="assets/logos/windows-original.svg" alt="">
         {{this.shellService.selectedNode?.general?.system?.version}}
         {{this.shellService.selectedNode?.general?.system?.virtual ? '(VIRTUAL)': ''}}
-        - {{this.shellService.selectedNode?.host}}
+        - {{this.shellService.selectedNode?.host?.split('@')[1].split(':')[0]}}
       </li>
 
       <li [routerLink]="'/nodes/' + uiService.params?.host + '/info'" [routerLinkActive]="'active'"
@@ -30,10 +30,17 @@
         Info
       </li>
 
+
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/docker'" [routerLinkActive]="'active'">
+        <img src="assets/icons/solid/cubes.svg" alt="">
+        Apps
+      </li>
+
+<!-- 
       <li [routerLink]="'/nodes/' + uiService.params?.host + '/docker'" [routerLinkActive]="'active'">
         <img src="assets/icons/brands/docker.svg" alt="">
         Docker
-      </li>
+      </li> -->
 
       <li [routerLink]="'/nodes/' + uiService.params?.host + '/console'" (click)="shellService.tab = 'console'">
         <img src="assets/icons/solid/laptop-code.svg" alt="">

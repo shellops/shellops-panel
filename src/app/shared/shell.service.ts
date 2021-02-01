@@ -12,8 +12,10 @@ import { WsService } from './ws.service';
   providedIn: 'root'
 })
 export class ShellService {
-
-  public nodes: ShellNode[];
+  
+  get nodes(): ShellNode[]{
+    return JSON.parse(localStorage.getItem('nodes') || '[]');
+  }
 
   constructor(
     private readonly uiService: UiService,
@@ -23,12 +25,12 @@ export class ShellService {
     this.subscribeToWs();
   }
 
-  saveNodes() {
-    localStorage.setItem('nodes', JSON.stringify(this.nodes));
+  saveNodes(nodes) {
+    localStorage.setItem('nodes', JSON.stringify(nodes));
   }
 
   get selectedNode() {
-    return this.nodes?.find(p => p.host && p.host === this.uiService.params?.host)
+    return this.nodes?.find(p => p.host.split('@')[1].split(':')[0] === this.uiService.params?.host)
   }
 
   async subscribeToWs() {
@@ -40,42 +42,37 @@ export class ShellService {
 
   }
 
+  addNode(host: string) {
+    localStorage.setItem('nodes',
+     JSON.stringify(
+       [...this.nodes, {host}]
+      ));
+
+  }
+
+
   async deleteNode(host: string) {
-    await this.http.delete<ShellNode[]>(environment.api + '/api/v1/nodes/' + host).toPromise();
+
+    localStorage.setItem('nodes',
+    JSON.stringify(
+      this.nodes.filter(p=> p.host.split('@')[1] !== host.split('@')[1])
+     ));
+
     await this.loadNodes();
   }
 
   async loadNodes() {
 
-    this.nodes = this.nodes || JSON.parse(localStorage.getItem('nodes') || '[]');
-
     try {
 
-      const newList = await this.http.get<ShellNode[]>(environment.api + '/api/v1/nodes').toPromise();
-      if (!this.nodes?.length)
-        this.nodes = newList;
-      else
-        this.nodes.forEach((node, i) => {
-          const existing = newList.find(p => p.host === node.host);
-          if (existing)
-            Object.assign(node, existing);
-          else
-            this.nodes[i] = null;
-        });
-
-
-      this.nodes.concat(newList.filter(n => !this.nodes.find(p => p.host === n.host)));
-
-      this.nodes = this.nodes.filter(p => p);
-
-      this.nodes.forEach(async (node) => {
+      const nodes = await Promise.all( this.nodes.map(async (node) => {
         node.general = await this.generalInfo(node.host)
         node.geoIp = await this.geoIpInfo(node.host)
         node.docker = await this.docker(node.host)
-      });
+        return node;
+      }));
 
-
-      this.saveNodes();
+      this.saveNodes(nodes);
 
     } catch (error) {
       setTimeout(() => {
@@ -87,49 +84,36 @@ export class ShellService {
 
   public async docker(host: string) {
     return this.http.get<GeneralSysInfo>
-      (environment.api + `/api/v1/sysinfo/${host}/docker`)
+      (host +`/api/v1/sysinfo/docker`)
       .toPromise();
   }
-
-  public async installDocker(host: string) {
-
-    return this.http.post
-      (environment.api + `/api/v1/shell/${host}/docker`, {})
-      .toPromise();
-
-  }
-
-  public async installPoste(host: string) {
-
-    return this.http.post
-      (environment.api + `/api/v1/shell/${host}/poste`, {})
-      .toPromise();
-
-  }
-
-
-  public async uninstallDocker(host: string) {
-
-    await this.http.delete
-      (environment.api + `/api/v1/shell/${host}/docker`, {})
-      .toPromise();
-
-    await this.loadNodes();
-
-  }
-
+  
 
   public async generalInfo(host: string) {
 
     return this.http.get<GeneralSysInfo>
-      (environment.api + `/api/v1/sysinfo/${host}/general`)
+      (host +`/api/v1/sysinfo/general`)
       .toPromise();
 
   }
 
   public async geoIpInfo(host: string) {
     return this.http.get<GeoIpSysInfo>
-      (environment.api + `/api/v1/sysinfo/${host}/geo-ip`)
+      (host +`/api/v1/sysinfo/geo-ip`)
+      .toPromise();
+  }
+
+  public async templates() {
+
+    return this.http.get<any>
+      (environment.api + `/api/v1/store/app-templates`)
+      .toPromise();
+
+  }
+
+  public async  installApp(template: any) {
+    return this.http.post<any>
+      (environment.api + `/api/v1/machine/apps`,template)
       .toPromise();
   }
 

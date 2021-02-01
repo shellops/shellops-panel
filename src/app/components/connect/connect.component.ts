@@ -13,7 +13,6 @@ export class ConnectComponent implements OnInit {
 
   public newShell = {
     host: '',
-    password: ''
   };
 
   constructor(private readonly http: HttpClient, private readonly shellService: ShellService) {
@@ -24,13 +23,12 @@ export class ConnectComponent implements OnInit {
 
   async addNewShell() {
 
-    await this.http.post<any>(environment.api + '/api/v1/node', this.newShell).toPromise();
-
+    this.shellService.addNode(this.newShell.host);
+    
     await this.shellService.loadNodes();
 
     this.newShell = {
       host: '',
-      password: ''
     };
   }
 

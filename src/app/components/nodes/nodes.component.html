@@ -1,18 +1,18 @@
-<div class="node-card" *ngFor="let node of shellService.nodes" [routerLink]="'/nodes/' + node.host + '/info'">
+<div class="node-card" *ngFor="let node of shellService.nodes"
+    [routerLink]="'/nodes/' + (node.host?.split('@')[1].split(':')[0]) + '/info'">
 
 
-   
-    
+
+
     <div class="title">
 
         <img
             [src]="'https://hatscripts.github.io/circle-flags/flags/'+ (node?.geoIp?.countryCode?.toLowerCase() || 'xx') +'.svg'" />
 
-        {{node?.host}}
+        {{node?.host?.split('@')[1].split(':')[0]}}
 
 
     </div>
-
     <ul *ngIf="!node?.general">
         <li>
             Connecting to ssh server ...
