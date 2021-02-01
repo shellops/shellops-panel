@@ -35,11 +35,17 @@ export class NodeDockerComponent implements OnInit {
 
   async ngOnInit() {
     this.templates = await this.shellService.templates();
+    this.apps = await this.shellService.apps();
   }
 
   async installApp(template) {
 
     await this.shellService.installApp(template);
+
+  }
+
+
+  async uninstallApp(appId) {
 
   }
 

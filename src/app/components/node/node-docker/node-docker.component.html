@@ -1,8 +1,10 @@
 <div *ngIf="model?.general?.versions?.docker" class="box">
 
-    <ul>
+    <section>
 
-
+        <div class="title">
+            Templates
+        </div>
         <div *ngFor="let template of templates" class="app">
 
             <div class="title">
@@ -19,14 +21,10 @@
             </p>
 
             <div class="buttons">
-
                 <button (click)="installApp(template)">
                     Install
                 </button>
-
                 <a *ngIf="template.website" [href]="template.website">Website</a>
-
-
             </div>
 
 
@@ -64,5 +62,37 @@
             </ul> -->
         </div>
 
-    </ul>
+    </section>
+    <section>
+
+        <div class="title">
+            Installed Apps
+        </div>
+
+        <div *ngFor="let app of apps" class="app">
+
+            <div class="title">
+
+                <img *ngIf="app.logo" [src]="app.logo" alt="">
+
+                {{app.name}} {{app.version}}
+
+            </div>
+
+            <ul class="variables">
+                <li *ngFor="let item of app.variables">
+                    <label for="">{{item.name}}</label>
+                    <input type="text" readonly [value]="item.value">
+                </li>
+            </ul>
+
+            <div class="buttons">
+                <button (click)="uninstallApp(app.id)">
+                    Uninstall
+                </button>
+            </div>
+
+        </div>
+    </section>
+
 </div>

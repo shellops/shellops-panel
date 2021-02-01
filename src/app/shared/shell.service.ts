@@ -111,6 +111,14 @@ export class ShellService {
 
   }
 
+  public async apps() {
+
+    return this.http.get<any>
+      (environment.api + `/api/v1/machine/apps`)
+      .toPromise();
+
+  }
+
   public async  installApp(template: any) {
     return this.http.post<any>
       (environment.api + `/api/v1/machine/apps`,template)
