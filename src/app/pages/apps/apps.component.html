@@ -15,55 +15,114 @@
             </span>
 
             <span *ngIf="!container.app">
-                {{container.name}}
+                {{container.Names[0]?.replace('/','')}}
             </span>
 
         </div>
 
-        <ul class="variables">
-            <li *ngFor="let item of container.app?.variables">
-                <label for="">{{item.name}}</label>
-                <input type="text" readonly [value]="item.value">
-            </li>
-        </ul>
+
+        <div class="stats">
+
+
+
+        </div>
 
         <div class="buttons">
-            <button (click)="removeContainer(container.name)">
+            <button (click)="removeContainer(container.Id)">
+                <img src="assets/icons/solid/trash-alt.svg" alt="">
                 Uninstall
             </button>
+
+            <button *ngIf="!shellService.realtime[container.Id]?.container?.State.Paused"
+                (click)="removeContainer(container.Id)">
+                <img src="assets/icons/solid/pause.svg" alt="">
+                Stop
+            </button>
+
+            <button *ngIf="shellService.realtime[container.Id]?.container?.State.Paused"
+                (click)="removeContainer(container.Id)">
+                <img src="assets/icons/solid/play.svg" alt="">
+                Start
+            </button>
+
         </div>
 
 
+
         <ul *ngIf="container">
+
             <li>
-                Image: <span>{{container.image}}</span>
-            </li>
-            <li>
-                Restarts: <span>{{container.restartCount}}</span>
-            </li>
-            <li>
-                State: <span>{{container.state}}</span>
+                Status:
+                <span>
+                    {{shellService.realtime[container.Id]?.container?.State?.Status }}
+                </span>
             </li>
 
             <li>
-                Created At: <span>{{container.createdAt | date}}</span>
+                Uptime: <span>{{container.Status}}</span>
             </li>
 
             <li>
-                Started At: <span>{{container.startedAt | date}}</span>
+                Memory Usage:
+                <span>
+                    {{shellService.realtime[container.Id]?.stats?.memory_stats?.usage | bytes: 2}}
+                </span>
+
+                <div class="memory">
+                    <ngx-charts-line-chart [legend]="false" [view]="[260,40]" [scheme]="'cool'" [showXAxisLabel]="false"
+                        [showYAxisLabel]="false" [showGridLines]="false" [animations]="false"
+                        [results]="shellService.memoryCharts[container.Id] || []">
+                    </ngx-charts-line-chart>
+                </div>
+
             </li>
 
             <li>
+                CPU Usage
+
+                <div class="memory">
+                    <ngx-charts-line-chart [legend]="false" [view]="[260,40]" [scheme]="'cool'" [showXAxisLabel]="false"
+                        [showYAxisLabel]="false" [showGridLines]="false" [animations]="false"
+                        [results]="shellService.cpuCharts[container.Id] || []">
+                    </ngx-charts-line-chart>
+                </div>
+
+            </li>
+
+            <li>
+                Image: <span>{{container.Image}}</span>
+            </li>
+
+            <li>
+                Created At: <span>{{container.Created | mdate}}</span>
+            </li>
+
+            <li *ngIf="container?.Ports?.length">
                 Ports:
                 <ul>
-                    <li *ngFor="let item of container.ports">
-                        local
-                        <span> {{item.PrivatePort}} </span> ->
-                        public
+                    <li *ngFor="let item of container.Ports">
+                        <span> {{item.PrivatePort || 'N/A'}} </span> ->
                         <span> {{item.PublicPort || 'N/A'}}</span>
                     </li>
                 </ul>
             </li>
+            <li *ngIf="container?.Mounts">
+                Mounts:
+                <ul>
+                    <li *ngFor="let item of container.Mounts">
+                        <span> {{item.Source || 'N/A'}} </span> ->
+                        <span> {{item.Destination || 'N/A'}}</span>
+                    </li>
+                </ul>
+            </li>
+
+
+            <ul class="variables">
+                <li *ngFor="let item of container.app?.variables">
+                    <label for="">{{item.name}}</label>
+                    <input type="text" readonly [value]="item.value">
+                </li>
+            </ul>
 
         </ul>
     </div>

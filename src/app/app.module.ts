@@ -2,7 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgPipesModule } from 'ngx-pipes';
+import { NgPipesModule } from 'ngx-pipes'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,7 +25,7 @@ import { InfoComponent } from './pages/info/info.component';
 import { AppsComponent } from './pages/apps/apps.component';
 import { TemplatesComponent } from './pages/templates/templates.component';
 import { MdatePipe } from './mdate.pipe';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,8 @@ import { MdatePipe } from './mdate.pipe';
     MdatePipe,
   ],
   imports: [
+    BrowserAnimationsModule,
+    NgxChartsModule,
     NgPipesModule,
     BrowserModule,
     HttpClientModule,

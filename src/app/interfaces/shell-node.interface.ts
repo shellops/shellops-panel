@@ -1,8 +1,9 @@
-import { GeneralSysInfo } from "./general-sys-info.interface";
-import { GeoIpSysInfo } from "./geoip-sys-info.interface";
+import { Container } from './docker.namespace';
+import { GeneralSysInfo } from './general-sys-info.interface';
+import { GeoIpSysInfo } from './geoip-sys-info.interface';
 
 export interface ShellNode {
-    docker: any;
+    containers: Container[];
 
     host: string;
 

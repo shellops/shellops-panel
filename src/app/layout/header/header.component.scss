@@ -42,6 +42,13 @@ ul {
       filter: invert(1);
     }
 
+    &.back{
+      img {
+        filter: none;
+        opacity: 1;
+      }
+    }
+
     &.host {
       img {
         filter: none;

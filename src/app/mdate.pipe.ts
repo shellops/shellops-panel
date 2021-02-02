@@ -9,7 +9,7 @@ export class MdatePipe implements PipeTransform {
     if (typeof value === "undefined" || value == null || !value) {
       return "";
     }
-    return moment(value).format(format || 'jYYYY/jMM/jDD HH:mm');
+    return moment(value).format(format || 'YYYY-MM-DD HH:mm');
   }
 
 }
