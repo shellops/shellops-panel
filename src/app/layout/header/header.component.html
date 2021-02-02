@@ -31,10 +31,17 @@
       </li>
 
 
-      <li [routerLink]="'/nodes/' + uiService.params?.host + '/docker'" [routerLinkActive]="'active'">
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/apps'" [routerLinkActive]="'active'">
         <img src="assets/icons/solid/cubes.svg" alt="">
         Apps
       </li>
+
+
+      <li [routerLink]="'/nodes/' + uiService.params?.host + '/templates'" [routerLinkActive]="'active'">
+        <img src="assets/icons/solid/shopping-cart.svg" alt="">
+        Store
+      </li>
+
 
 <!-- 
       <li [routerLink]="'/nodes/' + uiService.params?.host + '/docker'" [routerLinkActive]="'active'">
