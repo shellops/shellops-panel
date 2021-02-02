@@ -1,0 +1,31 @@
+
+    <section class="box">
+
+        <div class="title">
+            Templates
+        </div>
+        <div *ngFor="let template of templates" class="app">
+
+            <div class="title">
+
+                <img *ngIf="template.logo" [src]="template.logo" alt="">
+
+                {{template.name}} {{template.version}}
+
+            </div>
+
+            <p class="desc">
+                {{template.description}}
+
+            </p>
+
+            <div class="buttons">
+                <button (click)="installApp(template)">
+                    Install
+                </button>
+                <a *ngIf="template.website" [href]="template.website">Website</a>
+            </div>
+
+        </div>
+
+    </section>
