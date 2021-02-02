@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+
 import { ConsoleComponent } from './components/console/console.component';
-import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
-import { NodeInfoComponent } from './components/node/node-info/node-info.component';
 import { NotFoundComponent } from './layout/not-found/not-found.component';
+import { AppsComponent } from './pages/apps/apps.component';
+import { InfoComponent } from './pages/info/info.component';
 import { StartComponent } from './pages/start/start.component';
+import { TemplatesComponent } from './pages/templates/templates.component';
 
 const routes: Routes = [
   {
@@ -12,12 +14,16 @@ const routes: Routes = [
     path: ''
   },
   {
-    component: NodeInfoComponent,
+    component: InfoComponent,
     path: 'nodes/:host/info'
   },
   {
-    component: NodeDockerComponent,
-    path: 'nodes/:host/docker'
+    component: AppsComponent,
+    path: 'nodes/:host/apps'
+  },
+  {
+    component: TemplatesComponent,
+    path: 'nodes/:host/templates'
   },
   {
     component: ConsoleComponent,
