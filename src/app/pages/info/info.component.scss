@@ -1,0 +1,53 @@
+li.versions {
+    .icon {
+      text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      margin: 5px;
+      box-sizing: border-box;
+  
+      padding: 5px;
+      border-radius: 10px;
+      line-height: 18px;
+  
+      span {
+        font-size: 9px;
+      }
+    }
+  
+    img {
+      max-height: 30px;
+      max-width: 30px;
+  
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  
+  li.actions {
+    .icon {
+      text-align: center;
+      display: inline-block;
+      vertical-align: top;
+      margin: 5px;
+      box-sizing: border-box;
+  
+      padding: 5px;
+      border-radius: 10px;
+      line-height: 18px;
+  
+      span {
+        white-space: nowrap;
+        font-size: 13px;
+      }
+    }
+  
+    img {
+      max-height: 30px;
+      max-width: 30px;
+      display: inline-block;
+      margin: 0 auto;
+      vertical-align: middle;
+    }
+  }
+  
