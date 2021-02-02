@@ -1,14 +1,15 @@
 <div class="container">
 
-    <aside>
-      <app-connect></app-connect>
-      <app-nodes></app-nodes>
-    </aside>
+  <aside>
+    <app-connect></app-connect>
+    <app-nodes></app-nodes>
+  </aside>
 
-    <aside class="second">
-      <div class="map">
-        <img src="http://localhost:3000/api/v1/sysinfo/local/location.svg" alt="">
-      </div>
-    </aside>
+  <aside class="second">
+    <div class="map">
+      <img *ngIf="shellService.nodes[0]"
+        [src]="'http://'+ shellService.nodes[0].host?.split('@')[1] + '/api/v1/sysinfo/location.svg'" alt="">
+    </div>
+  </aside>
 
 </div>
