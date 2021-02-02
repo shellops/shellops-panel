@@ -1,0 +1,70 @@
+<section class="box">
+
+    <div class="title">
+        Installed Apps
+    </div>
+
+    <div *ngFor="let container of containers" class="app">
+
+        <div class="title">
+
+            <img *ngIf="container.app?.logo" [src]="container.app?.logo" alt="">
+
+            <span *ngIf="container.app">
+                {{container.app.name}} {{container.app.version}}
+            </span>
+
+            <span *ngIf="!container.app">
+                {{container.name}}
+            </span>
+
+        </div>
+
+        <ul class="variables">
+            <li *ngFor="let item of container.app?.variables">
+                <label for="">{{item.name}}</label>
+                <input type="text" readonly [value]="item.value">
+            </li>
+        </ul>
+
+        <div class="buttons">
+            <button (click)="removeContainer(container.name)">
+                Uninstall
+            </button>
+        </div>
+
+
+        <ul *ngIf="container">
+            <li>
+                Image: <span>{{container.image}}</span>
+            </li>
+            <li>
+                Restarts: <span>{{container.restartCount}}</span>
+            </li>
+            <li>
+                State: <span>{{container.state}}</span>
+            </li>
+
+            <li>
+                Created At: <span>{{container.createdAt | date}}</span>
+            </li>
+
+            <li>
+                Started At: <span>{{container.startedAt | date}}</span>
+            </li>
+
+            <li>
+                Ports:
+                <ul>
+                    <li *ngFor="let item of container.ports">
+                        local
+                        <span> {{item.PrivatePort}} </span> ->
+                        public
+                        <span> {{item.PublicPort || 'N/A'}}</span>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+</section>
