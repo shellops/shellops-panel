@@ -1,3 +1,8 @@
+.box {
+  background: #222;
+  box-shadow: 0 0 3px #000;
+}
+
 .node-card {
   max-width: 220px;
   display: inline-block;
@@ -10,6 +15,7 @@
   margin: 15px 15px 0 0;
   cursor: pointer;
   position: relative;
+  box-shadow: 0 0 3px #000;
 
   &:hover {
     .trash {
