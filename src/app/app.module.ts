@@ -9,8 +9,7 @@ import { AppComponent } from './app.component';
 import { ConnectComponent } from './components/connect/connect.component';
 import { ConsoleComponent } from './components/console/console.component';
 import { MapComponent } from './components/map/map.component';
-import { NodeDockerComponent } from './components/node/node-docker/node-docker.component';
-import { NodeInfoComponent } from './components/node/node-info/node-info.component';
+
 import { NodesComponent } from './components/nodes/nodes.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HeaderComponent } from './layout/header/header.component';
@@ -21,6 +20,10 @@ import { AccountComponent } from './pages/account/account.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
 import { StartComponent } from './pages/start/start.component';
+import { InfoComponent } from './pages/info/info.component';
+import { AppsComponent } from './pages/apps/apps.component';
+import { TemplatesComponent } from './pages/templates/templates.component';
+import { MdatePipe } from './mdate.pipe';
 
 @NgModule({
   declarations: [
@@ -34,12 +37,14 @@ import { StartComponent } from './pages/start/start.component';
     NodesComponent,
     ConnectComponent,
     MapComponent,
-    NodeInfoComponent,
     LoadingComponent,
-    NodeDockerComponent,
     ConsoleComponent,
     StartComponent,
     NotFoundComponent,
+    InfoComponent,
+    AppsComponent,
+    TemplatesComponent,
+    MdatePipe,
   ],
   imports: [
     NgPipesModule,
