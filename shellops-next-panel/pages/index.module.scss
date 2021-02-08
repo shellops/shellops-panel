@@ -1,0 +1,39 @@
+.connect {
+  min-height: calc(100vh - 100px);
+  background: url("/store.svg") no-repeat bottom center;
+  background-size: 400px;
+  border-bottom: 5px solid #827029;
+  box-sizing: border-box;
+  padding-top: 30px;
+
+  section {
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background: #222;
+    box-shadow: 0 0 5px #000;
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  pre,
+  input {
+    text-align: start;
+    background: #111;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 15px 0;
+    display: block;
+    border: none;
+    width: 100%;
+  }
+
+  h1 {
+    font-weight: 100;
+    font-size: 17px;
+    margin-bottom: 45px;
+    color: #eee;
+  }
+}
