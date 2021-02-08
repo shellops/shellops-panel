@@ -5,7 +5,7 @@ export interface GeneralSysInfo {
     cpu: SysInfo.CpuData,
     system: SysInfo.SystemData,
     os: SysInfo.OsData,
-    disks: SysInfo.DiskLayoutData,
+    disks: SysInfo.DiskLayoutData[],
     graphics: SysInfo.GraphicsData,
     networks: SysInfo.NetworkInterfacesData[],
     versions: SysInfo.VersionData

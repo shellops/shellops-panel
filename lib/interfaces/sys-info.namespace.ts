@@ -249,6 +249,7 @@ export namespace SysInfo {
     }
   
     export interface GraphicsControllerData {
+      machine: any;
       vendor: string;
       model: string;
       bus: string;

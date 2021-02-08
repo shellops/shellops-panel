@@ -1,5 +1,9 @@
+import { MachineInfo } from "./machine-info.interface";
+
 export interface AppProps {
 
-  user: any
+  machines?: MachineInfo[];
+  machine?: MachineInfo;
+  user?: any
 
 }
