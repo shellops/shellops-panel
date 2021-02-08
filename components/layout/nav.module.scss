@@ -1,0 +1,63 @@
+.nav {
+  display: block;
+  margin: 0;
+  background: #101013;
+  position: relative;
+  z-index: 1;
+  img {
+    filter: invert(1);
+  }
+
+  ul {
+    border-right: none;
+    line-height: 40px;
+    padding: 0 10px;
+    text-align: center;
+    li {
+      border: none;
+      font-weight: 500;
+      font-size: 13px;
+      background: none;
+      padding: 0 15px;
+      text-align: center;
+      color: #aeaeae;
+      display: inline-block;
+      border-right: 1px solid #333;
+      cursor: default;
+      outline: none;
+      user-select: none;
+
+      &.back {
+      }
+
+      b {
+        font-weight: bold;
+      }
+
+      &.active {
+        background: #333;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+
+      img {
+        opacity: 0.7;
+        height: 16px;
+        margin: 0 auto;
+        display: inline-block;
+        vertical-align: middle;
+        filter: invert(1);
+        margin-right: 10px;
+      }
+
+      &.host {
+        img {
+          filter: none;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
