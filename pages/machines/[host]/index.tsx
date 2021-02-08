@@ -1,32 +1,14 @@
-import prettyBytes from "pretty-bytes";
+import { pick } from "lodash";
 import { useRouter } from "next/router";
+import prettyBytes from "pretty-bytes";
+import { memo } from "react";
+
+import { AppProps } from "../../../lib/interfaces/app-props.interface";
 import styles from "./index.module.scss";
 
-import { useEffect, useState } from "react";
-import useLiveMachinesEffect, {
-  getUrlTokens,
-} from "../../../lib/live-machines.effect";
-import { pick } from "lodash";
-
-export default function MachinePage(props) {
-  const router = useRouter();
-  const { host } = router.query;
-  const [machines, machinesChange] = useState([]);
-  const [urlToken, urlTokenChange] = useState(null);
-
-  useEffect(() => {
-    if (!urlToken)
-      urlTokenChange(
-        getUrlTokens().find((p) => {
-          const urlToken = new URL(p);
-          return host === urlToken.hostname;
-        })
-      );
-  });
-
-  const model = machines.find((p) => p.urlToken == urlToken);
+export default function MachinePage({ machine }: AppProps) {
   const appVersions = pick(
-    model?.general?.versions || {},
+    machine?.general?.versions || {},
     [
       "docker",
       "node",
@@ -41,124 +23,125 @@ export default function MachinePage(props) {
       "java",
       "git",
       "virtualbox",
-    ].filter((p) => model?.general?.versions[p])
+    ].filter((p) => machine?.general?.versions[p])
   );
 
-  useLiveMachinesEffect(machinesChange);
-
-  console.log("render");
-
   return (
-    <div className={styles.box}>
-      <ul>
-        <li>
-          OS:
-          <span>
-            {model?.general?.os?.distro}
-            {model?.general?.os?.release}
-          </span>
-        </li>
+    <div>
+      <div className={styles.bg}></div>
+      <div className={styles.box}>
+        <ul>
+          <li>
+            OS:
+            <span>
+              {machine?.general?.os?.distro}
+              {machine?.general?.os?.release}
+            </span>
+          </li>
 
-        <li>
-          Hostname:
-          <span>{model?.general?.os?.hostname}</span>
-        </li>
+          <li>
+            Hostname:
+            <span>{machine?.general?.os?.hostname}</span>
+          </li>
 
-        <li>
-          Kernel:
-          <span>{model?.general?.os?.kernel}</span>
-        </li>
+          <li>
+            Kernel:
+            <span>{machine?.general?.os?.kernel}</span>
+          </li>
 
-        <li>
-          CPU:
-          <span>
-            {model?.general?.cpu?.brand}, {model?.general?.cpu.cores} Cores -{" "}
-            {model?.general?.cpu.speedmax} GHZ
-          </span>
-        </li>
+          <li>
+            CPU:
+            <span>
+              {machine?.general?.cpu?.brand}, {machine?.general?.cpu.cores}{" "}
+              Cores - {machine?.general?.cpu.speedmax} GHZ
+            </span>
+          </li>
 
-        <li>
-          Memory:
-          <span></span>
-          <ul>
-            {model?.general?.memories?.map((memory) => (
+          <li>
+            Memory:
+            <span></span>
+            <ul>
+              {machine?.general?.memories?.map((memory) => (
+                <li key={memory.partNum}>
+                  <span>
+                    {memory?.type}
+                    {prettyBytes(memory?.size)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </li>
+
+          <li>
+            Disk:
+            <ul>
+              {machine?.general?.disks?.map((disk) => (
+                <li key={disk.device}>
+                  <span>
+                    {disk?.type} {disk?.vendor} {prettyBytes(disk?.size)}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </li>
+
+          <li>
+            Graphics:
+            <ul>
+              {machine?.general?.graphics?.controllers?.map((c) => (
+                <li key={c.vendor}>
+                  <span>
+                    {c.vendor?.replace("Corporation", "")}
+                    {c.model?.replace("Graphics Controller", "")}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </li>
+
+          <li>
+            Public IP:
+            <ul>
               <li>
                 <span>
-                  {memory?.type}
-                  {prettyBytes(memory?.size)}
+                  <img
+                    src={
+                      "https://hatscripts.github.io/circle-flags/flags/" +
+                      (machine?.geoIp?.countryCode?.toLowerCase() || "xx") +
+                      ".svg"
+                    }
+                  />
+                  <span>
+                    {machine?.geoIp?.ip} {machine?.geoIp?.isp}{" "}
+                    {[machine?.geoIp?.country, machine?.geoIp?.city]
+                      .filter((p) => p)
+                      .join(", ") || "N/A"}
+                  </span>
                 </span>
               </li>
-            ))}
-          </ul>
-        </li>
+            </ul>
+          </li>
 
-        <li>
-          Disk:
-          <ul>
-            {model?.general?.disks?.map((disk) => (
-              <li>
-                <span>
-                  {disk?.type} {disk?.vendor} {prettyBytes(disk?.size)}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        <li>
-          Graphics:
-          <ul>
-            {model?.general?.graphics?.controllers?.map((c) => (
-              <li>
-                <span>
-                  {c.vendor.replace("Corporation", "")}
-                  {c.model.replace("Graphics Controller", "")}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        <li>
-          Public IP:
-          <ul>
-            <li>
-              <span>
-                <img
-                  src={
-                    "https://hatscripts.github.io/circle-flags/flags/" +
-                    (model?.geoIp?.countryCode?.toLowerCase() || "xx") +
-                    ".svg"
-                  }
-                />
-                <span>
-                  {model?.geoIp?.ip} {model?.geoIp?.isp}{" "}
-                  {[model?.geoIp?.country, model?.geoIp?.city]
-                    .filter((p) => p)
-                    .join(", ") || 'N/A'}
-                </span>
-              </span>
-            </li>
-          </ul>
-        </li>
-
-        <li className={styles.versions}>
-          {Object.keys(appVersions).map((app) => (
-            <>
-              <div className={styles.icon}>
+          <li className={styles.versions}>
+            {Object.keys(appVersions).map((app) => (
+              <div key={app} className={styles.icon}>
                 <img src={"/logos/" + app + "-original.svg"} alt="" />
-                <span>{model?.general?.versions[app]}</span>
+                <span>{machine?.general?.versions[app]}</span>
               </div>
-            </>
-          ))}
-        </li>
-        <li className={styles.actions}>
-          <div className={styles.icon}>
-            <img className={styles.trash} src="/icons/solid/trash.svg" alt="" />
-            <span>Remove</span>
-          </div>
-        </li>
-      </ul>
+            ))}
+          </li>
+          <li className={styles.actions}>
+            <div className={styles.icon}>
+              <img
+                className={styles.trash}
+                src="/icons/solid/trash.svg"
+                alt=""
+              />
+              <span>Remove</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 }

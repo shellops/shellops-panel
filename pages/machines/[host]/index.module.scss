@@ -1,3 +1,19 @@
+.bg {
+  background: url("/thoughts.svg") no-repeat bottom left;
+  background-position-x: 100px;
+  background-size: 280px;
+  border-bottom: 5px solid #dfc768;
+  position: fixed;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  display: block;
+  content: " ";
+}
+
 .box {
   width: 100%;
   border-radius: 0 0 15px 15px;
@@ -7,7 +23,7 @@
   position: relative;
   text-align: start;
   color: #ccc;
-  background: #222;
+  background: #101013;
   box-shadow: 0 0 5px #000;
   max-width: 480px;
   margin: 30px auto;
@@ -49,12 +65,14 @@
       padding: 5px;
       font-weight: bold;
       line-height: 24px;
+      color: #dfc768;
 
       .inline {
         display: inline-block;
         vertical-align: top;
       }
       span {
+        margin-left: 5px;
         color: #fff;
         font-weight: 500;
 
