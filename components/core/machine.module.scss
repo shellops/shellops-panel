@@ -2,8 +2,8 @@
 .add {
   background: #222;
   width: 100%;
-  max-width: 200px;
-  min-height: 200px;
+  max-width: 240px;
+  min-height: 240px;
   display: inline-block;
   margin: 15px;
   vertical-align: top;
@@ -62,6 +62,10 @@
     width: 100%;
     padding: 0 10px;
     box-sizing: border-box;
+    button {
+      float: left;
+      margin: 0;
+    }
     img {
       margin: 5px;
       filter: invert(1);
