@@ -1,10 +1,12 @@
 import styles from "./machine.module.scss";
 
 export default function Machine({
+  onAddMode,
   machine,
   urlToken,
-  removeMachine
+  removeMachine,
 }: {
+  onAddMode?: any;
   urlToken?: string;
   machine?: any;
   removeMachine?;
@@ -66,7 +68,7 @@ export default function Machine({
           </div>
         </div>
       ) : (
-        <div className={styles.add}>
+        <div className={styles.add} onClick={onAddMode}>
           <img src="icons/solid/plus.svg" alt="" />
           <span>Add new machine</span>
         </div>

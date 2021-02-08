@@ -37,6 +37,6 @@ export default function liveMachinesEffect(urlTokens: string[], machines: any[],
 
     refreshMachines();
 
-    return () => clearTimeout(refreshTimeout);
+    return () => { clearTimeout(refreshTimeout) };
   }, []);
 }

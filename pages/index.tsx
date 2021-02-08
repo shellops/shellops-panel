@@ -14,12 +14,17 @@ const Home: NextPage<any> = ({}: AppProps) => {
     global.localStorage?.getItem("urlTokens") || null
   );
 
+  let [addMode, toggleAddMode] = useState(false);
   const [urlToken, urlTokenChange] = useState("");
-  const [addMode, toggleAddMode] = useState(false);
   const [machines, machinesChange] = useState(null);
   const [urlTokens, urlTokensChange] = useState(savedTokens);
 
-  if (!addMode && !urlTokens?.length) toggleAddMode(true);
+  if (!addMode && !urlTokens?.length) addMode = true;
+
+  const handleSaveMachine = () => {
+    saveMachine(urlToken, urlTokensChange);
+    toggleAddMode(false);
+  };
 
   // * Handle machine changes, refresh every 3 second
   liveMachinesEffect(urlTokens, machines, machinesChange);
@@ -37,9 +42,7 @@ const Home: NextPage<any> = ({}: AppProps) => {
         onChange={(e) => urlTokenChange(e.target.value)}
         placeholder="URL Token here, EX: http://client:secret@1.2.3.4"
       />
-      <button onClick={() => saveMachine(urlToken, urlTokensChange)}>
-        Save and Connect
-      </button>
+      <button onClick={handleSaveMachine}>Save and Connect</button>
     </section>
   );
 
@@ -54,7 +57,7 @@ const Home: NextPage<any> = ({}: AppProps) => {
         />
       ))}
       {/* Add Button */}
-      <Machine />
+      <Machine onAddMode={() => toggleAddMode(true)} />
     </div>
   );
 
