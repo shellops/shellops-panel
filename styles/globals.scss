@@ -32,7 +32,7 @@ button {
 body {
   font-family: "Ubuntu Mono", monospace;
   font-size: 13px;
-  background: #111;
+  background: #09090b;
 }
 
 body,
@@ -48,8 +48,14 @@ p {
   font-family: "Roboto", sans-serif;
 }
 
-a {
+a,
+button {
   text-decoration: none;
+  cursor: pointer;
+}
+
+div {
+  position: relative;
 }
 
 .container {
@@ -59,6 +65,8 @@ a {
 header {
   height: 100px;
   box-sizing: border-box;
+  z-index: 1;
+  position: relative;
   padding: 30px 15px;
   line-height: 40px;
   text-align: center;
@@ -81,7 +89,7 @@ header {
   }
 
   .start {
-    color: #D5B63C;
+    color: #e7d151;
     background: #38393f;
     border-radius: 10px;
     // border-bottom:1px solid #3C54B3;
@@ -89,20 +97,5 @@ header {
 
   .login {
     float: right;
-  }
-
-  nav {
-    display: inline-block;
-    ul {
-      li {
-        display: inline-block;
-        margin: 15px;
-        font-size: 15px;
-        font-weight: bold;
-        a {
-          color: #ccc;
-        }
-      }
-    }
   }
 }
