@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 import LoadingSpinner from "../components/layout/loading";
 import Logo from "../components/layout/logo";
-import { AppProps } from "../lib/app-props.interface";
+import { AppProps } from "../lib/interfaces/app-props.interface";
 import currentUserEffect from "../lib/current-user.effect";
 import initFirebase from "../lib/firebase";
 

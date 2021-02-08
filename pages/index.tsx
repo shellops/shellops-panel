@@ -2,7 +2,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 
 import Machine from "../components/core/machine";
-import { AppProps } from "../lib/app-props.interface";
+import { AppProps } from "../lib/interfaces/app-props.interface";
 import useLiveMachinesEffect, {
   getUrlTokens,
 } from "../lib/live-machines.effect";
@@ -11,7 +11,7 @@ import saveMachine from "../lib/save-machine";
 import styles from "./index.module.scss";
 
 const Home: NextPage<any> = ({}: AppProps) => {
-  
+
   let [addMode, toggleAddMode] = useState(false);
   const [urlToken, urlTokenChange] = useState("");
   const [machines, machinesChange] = useState([]);

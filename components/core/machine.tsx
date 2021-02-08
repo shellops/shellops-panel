@@ -1,6 +1,8 @@
 import styles from "./machine.module.scss";
 
 import prettyBytes from "pretty-bytes";
+import { useRouter } from "next/router";
+import { MachineInfo } from "../../lib/interfaces/machine-info.interface";
 
 export default function Machine({
   onAddMode,
@@ -10,10 +12,12 @@ export default function Machine({
 }: {
   onAddMode?: any;
   urlToken?: string;
-  machine?: any;
+  machine?: MachineInfo;
   removeMachine?;
   editMachine?;
 }) {
+  const router = useRouter();
+
   return urlToken ? (
     <div className={styles.machine}>
       <h2>
@@ -34,18 +38,18 @@ export default function Machine({
       {machine?.general ? (
         <ul>
           <li>
-            {machine?.general?.os?.distro}
-            {machine?.general?.os?.release}
+            {machine?.general?.os?.distro} {machine?.general?.os?.release}
           </li>
 
           <li>
-            {machine?.geoIp?.isp || "N/A"}{" "}
-            {[machine?.geoIp?.city, machine?.geoIp?.country].join(", ") ||
-              "N/A"}
+            {machine?.geoIp?.isp}{" "}
+            {[machine?.geoIp?.city, machine?.geoIp?.country]
+              .filter((p) => p)
+              .join(", ")}
           </li>
 
           <li>
-            CPU: {machine?.general?.cpu.cores}Core{" "}
+            CPU: {machine?.general?.cpu.cores} Core{" "}
             {machine?.general?.cpu.speedmax || machine?.general?.cpu.speed}
             GHZ
           </li>
@@ -70,6 +74,9 @@ export default function Machine({
 
       <div className={styles.actions}>
         <img onClick={removeMachine} src="icons/solid/trash.svg" alt="" />
+        <button onClick={() => router.push("/machines/localhost")}>
+          Manage
+        </button>
       </div>
     </div>
   ) : (
