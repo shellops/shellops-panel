@@ -8,7 +8,6 @@
   margin: 15px;
   vertical-align: top;
   position: relative;
-  padding-bottom: 30px;
   box-sizing: border-box;
   color: #fff;
 }
@@ -34,13 +33,25 @@
 .machine {
   text-align: start;
   padding: 15px;
-
+  padding-bottom: 45px;
   line-height: 24px;
 
   h2 {
     margin-bottom: 5px;
     font-size: 17px;
     font-weight: bold;
+
+    img {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+
+  ul {
+    padding-left: 30px;
   }
 
   .actions {

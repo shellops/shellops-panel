@@ -1,35 +1,37 @@
 import { NextPage } from "next";
-import mitt from "next/dist/next-server/lib/mitt";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Machine from "../components/core/machine";
 import { AppProps } from "../lib/app-props.interface";
-import liveMachinesEffect from "../lib/live-machines.effect";
+import useLiveMachinesEffect, {
+  getUrlTokens,
+} from "../lib/live-machines.effect";
 import removeMachine from "../lib/remove-machine";
 import saveMachine from "../lib/save-machine";
 import styles from "./index.module.scss";
 
 const Home: NextPage<any> = ({}: AppProps) => {
-  const savedTokens: string[] = JSON.parse(
-    global.localStorage?.getItem("urlTokens") || null
-  );
-
+  
   let [addMode, toggleAddMode] = useState(false);
   const [urlToken, urlTokenChange] = useState("");
-  const [machines, machinesChange] = useState(null);
-  const [urlTokens, urlTokensChange] = useState(savedTokens);
+  const [machines, machinesChange] = useState([]);
+  const [urlTokens, urlTokensChange] = useState([]);
+
+  useEffect(() => {
+    urlTokensChange(getUrlTokens());
+    return () => {};
+  }, []);
 
   if (!addMode && !urlTokens?.length) addMode = true;
 
   const handleSaveMachine = () => {
+    if (!urlToken || urlTokens?.find((p) => p === urlToken)) return;
     saveMachine(urlToken, urlTokensChange);
-    toggleAddMode(false);
   };
-
   // * Handle machine changes, refresh every 3 second
-  liveMachinesEffect(urlTokens, machines, machinesChange);
+  useLiveMachinesEffect(  machinesChange);
 
-  const addNew = (
+  const add = (
     <section>
       <p>Install Shellops agent on your machine</p>
       <pre>npm i -g shellops</pre>
@@ -48,24 +50,22 @@ const Home: NextPage<any> = ({}: AppProps) => {
 
   const list = (
     <div className="container">
-      {urlTokens?.map((urlToken) => (
-        <Machine
-          key={urlToken}
-          urlToken={urlToken}
-          machine={machines?.find((p) => p.urlToken === urlToken)}
-          removeMachine={() => removeMachine(urlToken, urlTokensChange)}
-        />
-      ))}
-      {/* Add Button */}
-      <Machine onAddMode={() => toggleAddMode(true)} />
+      <div className={styles.list}>
+        {urlTokens?.map((urlToken) => (
+          <Machine
+            key={urlToken}
+            urlToken={urlToken}
+            machine={machines?.find((p) => p.urlToken === urlToken)}
+            removeMachine={() => removeMachine(urlToken, urlTokensChange)}
+          />
+        ))}
+
+        <Machine key="add" onAddMode={() => toggleAddMode(true)} />
+      </div>
     </div>
   );
 
-  return (
-    <>
-      <div className={styles.connect}>{addMode ? addNew : list}</div>
-    </>
-  );
+  return <div className={styles.connect}>{addMode ? add : list}</div>;
 };
 
 export default Home;
