@@ -1,0 +1,62 @@
+.machine,
+.add {
+  background: #222;
+  width: 100%;
+  max-width: 200px;
+  min-height: 200px;
+  display: inline-block;
+  margin: 15px;
+  vertical-align: top;
+  position: relative;
+  padding-bottom: 30px;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.add {
+  text-align: center;
+  color: #ccc;
+  cursor: default;
+
+  img {
+    width: 80px;
+    filter: invert(1);
+    display: block;
+    margin: 15px auto;
+    opacity: 0.5;
+    margin-top: 35px;
+  }
+  span {
+    display: block;
+  }
+}
+
+.machine {
+  text-align: start;
+  padding: 15px;
+
+  line-height: 24px;
+
+  h2 {
+    margin-bottom: 5px;
+    font-size: 17px;
+    font-weight: bold;
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: end;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    img {
+      margin: 5px;
+      filter: invert(1);
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
