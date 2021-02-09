@@ -5,6 +5,7 @@ import styles from "./account.module.scss";
 
 import initFirebase from "../lib/firebase";
 import LoadingSpinner from "../components/layout/loading";
+import { useRouter } from "next/router";
 
 export default function Account(context) {
   initFirebase();
@@ -12,15 +13,13 @@ export default function Account(context) {
   const [user, userChange] = useState(null);
   const [loading, loadingChange] = useState(true);
 
-  function logout() {
-    loadingChange(true);
-    firebase.auth().signOut();
-  }
+  const router = useRouter();
 
   // Configure FirebaseUI.
   const uiConfig = {
     signInFlow: "popup",
     signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.GithubAuthProvider.PROVIDER_ID,
     ],
@@ -37,12 +36,7 @@ export default function Account(context) {
   }, []);
 
   return user ? (
-    <div className={styles.account}>
-      <section>
-        <div>You are already logged in as `{user.displayName}`</div>
-        <button className={styles.logout} onClick={logout}>Logout</button>
-      </section>
-    </div>
+    router.push("/") && null
   ) : (
     <>
       <div className={styles.account}>
