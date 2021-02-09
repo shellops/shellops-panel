@@ -13,3 +13,42 @@
   display: block;
   content: " ";
 }
+
+.box {
+  display: inline-block;
+  width: 260px;
+  vertical-align: top;
+  background: #222;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 15px;
+  box-shadow: 0 0 3px #000;
+
+  p.desc {
+    padding: 10px;
+    line-height: 20px;
+    min-height: 40px;
+  }
+
+  .buttons {
+    padding: 0 5px;
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  .variables {
+    li{
+      border:none;
+    }
+    input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      background: #111;
+      box-sizing: border-box;
+      border: none;
+      color: #ccc;
+    }
+  }
+}
