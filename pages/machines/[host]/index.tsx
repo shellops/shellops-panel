@@ -4,9 +4,12 @@ import prettyBytes from "pretty-bytes";
 import { memo } from "react";
 
 import { AppProps } from "../../../lib/interfaces/app-props.interface";
+import removeMachine from "../../../lib/remove-machine";
 import styles from "./index.module.scss";
 
 export default function MachinePage({ machine }: AppProps) {
+  const router = useRouter();
+
   const appVersions = pick(
     machine?.general?.versions || {},
     [
@@ -131,14 +134,13 @@ export default function MachinePage({ machine }: AppProps) {
             ))}
           </li>
           <li className={styles.actions}>
-            <div className={styles.icon}>
-              <img
-                className={styles.trash}
-                src="/icons/solid/trash.svg"
-                alt=""
-              />
-              <span>Remove</span>
-            </div>
+            <button
+              onClick={() =>
+                removeMachine(machine.urlToken, () => router.push("/machines"))
+              }
+            >
+              Remove Machine
+            </button>
           </li>
         </ul>
       </div>

@@ -2,12 +2,12 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
-import { AppProps } from "../lib/interfaces/app-props.interface";
-import { getUrlTokens } from "../lib/live-machines.effect";
-import saveMachine from "../lib/save-machine";
+import { AppProps } from "../../lib/interfaces/app-props.interface";
+import { getUrlTokens } from "../../lib/live-machines.effect";
+import saveMachine from "../../lib/save-machine";
 import styles from "./add.module.scss";
 
-const Home: NextPage<any> = ({}: AppProps) => {
+const Home: NextPage<any> = ({ machines }: AppProps) => {
   const [urlToken, urlTokenChange] = useState("");
   const [urlTokens, urlTokensChange] = useState([]);
 
@@ -21,6 +21,7 @@ const Home: NextPage<any> = ({}: AppProps) => {
   const handleSaveMachine = () => {
     if (!urlToken || urlTokens?.find((p) => p === urlToken)) return;
     saveMachine(urlToken, urlTokensChange);
+    router.push("/machines");
   };
 
   return (
@@ -40,8 +41,14 @@ const Home: NextPage<any> = ({}: AppProps) => {
             placeholder="URL Token here, EX: http://client:secret@1.2.3.4"
           />
           <button onClick={handleSaveMachine}>Save and Connect</button>
-          <br />
-          <a onClick={() => router.replace("/")}>Back to list</a>
+          {machines.length ? (
+            <>
+              <br />
+              <a onClick={() => router.replace("/")}>Back to list</a>
+            </>
+          ) : (
+            ""
+          )}
         </section>
       </div>
     </>
