@@ -27,6 +27,11 @@
       outline: none;
       user-select: none;
       position: relative;
+      border-bottom: 2px solid transparent;
+
+      &.active {
+        border-bottom-color: #ffef0a;
+      }
 
       ul {
         display: none;
@@ -50,10 +55,6 @@
 
       b {
         font-weight: bold;
-      }
-
-      &.active {
-        background: #333;
       }
 
       &:last-child {

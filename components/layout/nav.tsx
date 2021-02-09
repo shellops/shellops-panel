@@ -18,7 +18,10 @@ export default function Nav({ machine, machines, user }: AppProps) {
       <ul>
         {machine ? (
           <>
-            <li className={styles.back} onClick={() => router.replace("/")}>
+            <li
+            
+              onClick={() => router.replace("/")}
+            >
               <img src="/icons/solid/chevron-left.svg" alt="" />
               Machines
             </li>
@@ -29,12 +32,25 @@ export default function Nav({ machine, machines, user }: AppProps) {
               {machine?.general?.system?.virtual ? "(VIRTUAL)" : ""} -{" "}
               {machine?.hostname}
             </li>
-            <li onClick={() => router.replace(`/machines/${machine.hostname}`)}>
+            <li
+              className={
+                window.location.pathname === `/machines/${machine.hostname}`
+                  ? styles.active
+                  : ""
+              }
+              onClick={() => router.replace(`/machines/${machine.hostname}`)}
+            >
               <img src="/icons/solid/info-circle.svg" alt="" />
               Info
             </li>
 
             <li
+              className={
+                window.location.pathname ===
+                `/machines/${machine.hostname}/store`
+                  ? styles.active
+                  : ""
+              }
               onClick={() =>
                 router.replace(`/machines/${machine.hostname}/store`)
               }
@@ -43,7 +59,17 @@ export default function Nav({ machine, machines, user }: AppProps) {
               Store
             </li>
 
-            <li>
+            <li
+              className={
+                window.location.pathname ===
+                `/machines/${machine.hostname}/apps`
+                  ? styles.active
+                  : ""
+              }
+              onClick={() =>
+                router.replace(`/machines/${machine.hostname}/apps`)
+              }
+            >
               <img src="/icons/solid/cubes.svg" alt="" />
               Apps
             </li>
@@ -51,6 +77,9 @@ export default function Nav({ machine, machines, user }: AppProps) {
         ) : (
           <>
             <li
+              className={
+                window.location.pathname === `/machines` ? styles.active : ""
+              }
               onClick={() =>
                 router.replace(machines.length ? "/" : "/machines/add")
               }
