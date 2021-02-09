@@ -26,6 +26,24 @@
       cursor: default;
       outline: none;
       user-select: none;
+      position: relative;
+
+      ul {
+        display: none;
+        position: absolute;
+        top: 40px;
+        left: -1px;
+        background: #101013;
+        width: 120px;
+        text-align: start;
+        border: 1px solid #333;
+      }
+
+      &:hover {
+        ul {
+          display: block;
+        }
+      }
 
       &.back {
       }
