@@ -10,7 +10,7 @@ async function refreshMachines(urlTokens: string[]) {
     try {
       updatedMachines.push({
         general: await fetchMachine("/api/v1/sysinfo/general", urlToken),
-        // geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
+        geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
         urlToken,
         hostname: urlToken?.split("@")[1].split(":")[0],
       });
