@@ -8,6 +8,8 @@ export interface MachineInfo {
 
     containers?: Container[];
 
+    apps?: any[];
+
     hostname?: string;
 
     general?: GeneralSysInfo;

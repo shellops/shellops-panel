@@ -7,11 +7,28 @@ import { MachineInfo } from './interfaces/machine-info.interface';
 async function refreshMachines(urlTokens: string[]) {
   const updatedMachines: MachineInfo[] = [];
   for (const urlToken of (urlTokens || [])) {
+
+    const apps = await fetchMachine(
+      `/api/v1/machine/apps`,
+      urlToken
+    );
+
+    const  containers = (
+      await fetchMachine(`/api/v1/docker/containers`, urlToken)
+    ).map((container) => {
+      container.app = apps.find(
+        (p) => "/" + p.container === container.Names[0]
+      );
+      return container;
+    });
+
     try {
       updatedMachines.push({
         general: await fetchMachine("/api/v1/sysinfo/general", urlToken),
-        geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
+        // geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
         urlToken,
+        apps,
+        containers,
         hostname: urlToken?.split("@")[1].split(":")[0],
       });
 
@@ -42,9 +59,9 @@ export default function useLiveMachinesEffect(machinesChange: any) {
 
       machinesChange(updatedMachines);
 
-      refreshTimeout = setTimeout(() => {
-        recurr();
-      }, 10000);
+      // refreshTimeout = setTimeout(() => {
+      //   recurr();
+      // }, 10000);
     };
 
     recurr();
