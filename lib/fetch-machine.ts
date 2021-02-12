@@ -1,4 +1,4 @@
-export default async function fetchMachine(path: string, urlToken: string, method = 'GET') {
+export default async function fetchMachine(path: string, urlToken: string, method = 'GET'): Promise<any> {
 
     const headers = new Headers();
     const userPass = urlToken.split('//')[1].split('@')[0];
