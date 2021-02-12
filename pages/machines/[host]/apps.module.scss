@@ -1,3 +1,4 @@
+
 .bg {
   background: url("/apps.svg") no-repeat bottom left;
   background-position-x: calc(100px);
@@ -31,6 +32,12 @@
     padding: 10px;
     line-height: 20px;
     min-height: 40px;
+  }
+
+  .chart {
+    > div {
+      margin-left: -60px;
+    }
   }
 
   ul {
