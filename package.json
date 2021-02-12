@@ -28,12 +28,14 @@
     "cookie": "^0.4.1",
     "firebase": "^8.2.2",
     "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "next": "10.0.5",
     "pretty-bytes": "^5.5.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-firebase-hooks": "^2.2.0",
     "react-firebaseui": "^4.1.0",
+    "react-vis": "^1.11.7",
     "sass": "^1.32.2"
   },
   "devDependencies": {
