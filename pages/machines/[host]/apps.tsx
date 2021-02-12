@@ -1,9 +1,9 @@
-import moment from 'moment';
-import React, { useEffect, useRef, useState } from 'react';
-import { LineSeries, XYPlot } from 'react-vis';
+import moment from "moment";
+import React, { useEffect, useRef, useState } from "react";
+import { LineSeries, XYPlot } from "react-vis";
 
-import { AppProps } from '../../../lib/interfaces/app-props.interface';
-import styles from './apps.module.scss';
+import { AppProps } from "../../../lib/interfaces/app-props.interface";
+import styles from "./apps.module.scss";
 
 export default function Apps({ machine }: AppProps) {
   const [realtime, realtimeChange] = useState({});
@@ -39,7 +39,7 @@ export default function Apps({ machine }: AppProps) {
       realtime[id] = {
         ...payload.container,
         stats:
-        payload.container?.State?.Status === "running"
+          payload.container?.State?.Status === "running"
             ? {
                 memory: Math.round(
                   (payload.stats.memory_stats.usage -
@@ -170,8 +170,8 @@ export default function Apps({ machine }: AppProps) {
                 <li>
                   Ports:
                   <ul>
-                    {container.Ports.map((item) => (
-                      <li>
+                    {container.Ports.map((item, i) => (
+                      <li key={i}>
                         <span> {item.PrivatePort || "-"} </span> {"->"}
                         <span> {item.PublicPort || "-"}</span>
                       </li>
@@ -186,10 +186,26 @@ export default function Apps({ machine }: AppProps) {
                 <li>
                   Mounts:
                   <ul>
-                    {container.Mounts.map((item) => (
-                      <li>
+                    {container.Mounts.map((item, i) => (
+                      <li key={i}>
                         <span> {item.Source || "-"} </span> {"->"}
                         <span> {item.Destination || "-"}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ) : (
+                <></>
+              )}
+
+              {realtime[container.Id].Config?.Env?.length ? (
+                <li>
+                  Variables:
+                  <ul className={styles.variables}>
+                    {realtime[container.Id].Config.Env.map((item, i) => (
+                      <li key={i}>
+                        <span> {item.split("=")[0]} </span>
+                        <input type="text" readOnly value={item.split("=")[1]} />
                       </li>
                     ))}
                   </ul>
