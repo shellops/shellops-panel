@@ -13,7 +13,7 @@ async function refreshMachines(urlTokens: string[]) {
       urlToken
     );
 
-    const  containers = (
+    const containers = (
       await fetchMachine(`/api/v1/docker/containers`, urlToken)
     ).map((container) => {
       container.app = apps.find(
@@ -59,9 +59,9 @@ export default function useLiveMachinesEffect(machinesChange: any) {
 
       machinesChange(updatedMachines);
 
-      // refreshTimeout = setTimeout(() => {
-      //   recurr();
-      // }, 10000);
+      refreshTimeout = setTimeout(() => {
+        recurr();
+      }, 3000);
     };
 
     recurr();
