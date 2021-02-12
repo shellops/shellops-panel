@@ -1,6 +1,7 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { LineSeries, XYPlot } from "react-vis";
+import fetchMachine from "../../../lib/fetch-machine";
 
 import { AppProps } from "../../../lib/interfaces/app-props.interface";
 import styles from "./apps.module.scss";
@@ -127,30 +128,37 @@ export default function Apps({ machine }: AppProps) {
                 Status: <span>{realtime[container.Id]?.State?.Status}</span>
               </li>
 
-              <li>
-                Memory Usage:{" "}
-                <span>{realtime[container.Id]?.stats?.memory} MB</span>
-                <div className={styles.chart}>
-                  <XYPlot dontCheckIfEmpty={true} width={330} height={80}>
-                    <LineSeries
-                      color={"#FF7805"}
-                      data={charts?.[container.Id]?.memory || []}
-                    />
-                  </XYPlot>
-                </div>
-              </li>
-
-              <li>
-                CPU Usage: <span>{realtime[container.Id]?.stats?.cpu} %</span>
-                <div className={styles.chart}>
-                  <XYPlot dontCheckIfEmpty={true} width={330} height={80}>
-                    <LineSeries
-                      color={"#FF7805"}
-                      data={charts?.[container.Id]?.cpu || []}
-                    />
-                  </XYPlot>
-                </div>
-              </li>
+              {charts?.[container.Id]?.memory?.length ? (
+                <li>
+                  Memory Usage:{" "}
+                  <span>{realtime[container.Id]?.stats?.memory} MB</span>
+                  <div className={styles.chart}>
+                    <XYPlot dontCheckIfEmpty={true} width={330} height={80}>
+                      <LineSeries
+                        color={"#FF7805"}
+                        data={charts?.[container.Id]?.memory || []}
+                      />
+                    </XYPlot>
+                  </div>
+                </li>
+              ) : (
+                <></>
+              )}
+              {charts?.[container.Id]?.cpu?.length ? (
+                <li>
+                  CPU Usage: <span>{realtime[container.Id]?.stats?.cpu} %</span>
+                  <div className={styles.chart}>
+                    <XYPlot dontCheckIfEmpty={true} width={330} height={80}>
+                      <LineSeries
+                        color={"#FF7805"}
+                        data={charts?.[container.Id]?.cpu || []}
+                      />
+                    </XYPlot>
+                  </div>
+                </li>
+              ) : (
+                <></>
+              )}
 
               <li>
                 Image: <span>{container.Image}</span>
@@ -160,12 +168,22 @@ export default function Apps({ machine }: AppProps) {
                 Created:{" "}
                 <span>{moment(container.Created * 1000).fromNow()}</span>
               </li>
-              <li>
-                Started:{" "}
-                <span>
-                  {moment(realtime[container.Id]?.State.StartedAt).fromNow()}
-                </span>
-              </li>
+
+              {realtime[container.Id]?.State?.Status === "running" ? (
+                <li>
+                  Started:{" "}
+                  <span>
+                    {moment(realtime[container.Id]?.State.StartedAt).fromNow()}
+                  </span>
+                </li>
+              ) : (
+                <li>
+                  Exited:{" "}
+                  <span>
+                    {moment(realtime[container.Id]?.State.FinishedAt).fromNow()}
+                  </span>
+                </li>
+              )}
               {container.Ports?.length ? (
                 <li>
                   Ports:
@@ -198,14 +216,18 @@ export default function Apps({ machine }: AppProps) {
                 <></>
               )}
 
-              {realtime[container.Id].Config?.Env?.length ? (
+              {realtime[container.Id]?.Config?.Env?.length ? (
                 <li>
                   Variables:
                   <ul className={styles.variables}>
                     {realtime[container.Id].Config.Env.map((item, i) => (
                       <li key={i}>
                         <span> {item.split("=")[0]} </span>
-                        <input type="text" readOnly value={item.split("=")[1]} />
+                        <input
+                          type="text"
+                          readOnly
+                          value={item.split("=")[1]}
+                        />
                       </li>
                     ))}
                   </ul>
