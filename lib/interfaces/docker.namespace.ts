@@ -94,6 +94,7 @@
 
 
   export interface Container {
+    stats: any;
     app: any;
     Id: string;
     Names: string[];
