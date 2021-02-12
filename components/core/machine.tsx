@@ -1,8 +1,8 @@
-import styles from "./machine.module.scss";
+import { useRouter } from 'next/router';
+import prettyBytes from 'pretty-bytes';
 
-import prettyBytes from "pretty-bytes";
-import { useRouter } from "next/router";
-import { MachineInfo } from "../../lib/interfaces/machine-info.interface";
+import { MachineInfo } from '../../lib/interfaces/machine-info.interface';
+import styles from './machine.module.scss';
 
 export default function Machine({
   onAddMode,
