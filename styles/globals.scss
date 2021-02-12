@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;900&display=swap");
+@import "reset.scss";
+@import "~react-vis/dist/style";
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #777;
+}
+
+button {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 5px 15px;
+  color: #fff;
+  display: block;
+  margin: 30px auto 0 auto;
+}
+
+body {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 13px;
+  background: #09090b;
+}
+
+body,
+a,
+input,
+pre,
+textarea,
+select {
+  color: #fff;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+}
+
+a,
+button {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+div {
+  position: relative;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+}
+header {
+  height: 100px;
+  box-sizing: border-box;
+  z-index: 1;
+  position: relative;
+  padding: 30px 15px;
+  line-height: 40px;
+  text-align: center;
+
+  .logo {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 60px;
+  }
+
+  .start,
+  .login {
+    float: right;
+    display: block;
+    margin: 15px;
+    font-weight: bold;
+    font-size: 17px;
+    padding: 0 10px;
+    cursor: pointer;
+  }
+
+  .start {
+    color: #e7d151;
+    background: #38393f;
+    border-radius: 10px;
+    // border-bottom:1px solid #3C54B3;
+  }
+
+  .login {
+    float: right;
+  }
+}

@@ -1,0 +1,77 @@
+.machine,
+.add {
+  background: #101013;
+  width: 100%;
+  max-width: 240px;
+  min-height: 240px;
+  display: inline-block;
+  margin: 15px;
+  vertical-align: top;
+  position: relative;
+  box-sizing: border-box;
+  color: #fff;
+}
+
+.add {
+  text-align: center;
+  color: #ccc;
+  cursor: default;
+
+  img {
+    width: 80px;
+    filter: invert(1);
+    display: block;
+    margin: 15px auto;
+    opacity: 0.5;
+    margin-top: 60px;
+  }
+  span {
+    display: block;
+  }
+}
+
+.machine {
+  text-align: start;
+  padding: 15px;
+  padding-bottom: 45px;
+  line-height: 24px;
+
+  h2 {
+    margin-bottom: 5px;
+    font-size: 17px;
+    font-weight: bold;
+
+    img {
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+  }
+
+  ul {
+    padding-left: 30px;
+  }
+
+  .actions {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    text-align: end;
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    button {
+      float: left;
+      margin: 0;
+    }
+    img {
+      margin: 5px;
+      filter: invert(1);
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}

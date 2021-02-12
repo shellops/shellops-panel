@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Turret+Road:wght@300&display=swap");
+
+.logo {
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 40px;
+  h1 {
+    font-family: "Turret Road", cursive;
+    font-weight: 300;
+    font-size: 30px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  img {
+    margin: 0 auto;
+    height: 40px;
+    vertical-align: middle;
+    display: inline-block;
+    padding-right: 4px;
+  }
+}

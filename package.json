@@ -1,54 +1,53 @@
 {
   "name": "shellops-panel",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": false,
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "dev": "ng serve",
-    "build": "ng build --prod",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "dev": "next dev --port 4000",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export"
   },
-  "private": true,
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "git-precommit-checks"
+    }
+  },
   "dependencies": {
-    "@angular/animations": "~11.0.6",
-    "@angular/cdk": "^11.1.1",
-    "@angular/common": "~11.0.6",
-    "@angular/compiler": "~11.0.6",
-    "@angular/core": "~11.0.6",
-    "@angular/forms": "~11.0.6",
-    "@angular/platform-browser": "~11.0.6",
-    "@angular/platform-browser-dynamic": "~11.0.6",
-    "@angular/router": "~11.0.6",
-    "@swimlane/ngx-charts": "^17.0.0",
+    "cookie": "^0.4.1",
+    "firebase": "^8.2.2",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
-    "ngx-pipes": "^2.7.5",
-    "rxjs": "~6.6.0",
-    "tslib": "^2.0.0",
-    "xterm": "^4.9.0",
-    "zone.js": "~0.10.2"
+    "next": "10.0.5",
+    "pretty-bytes": "^5.5.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-firebase-hooks": "^2.2.0",
+    "react-firebaseui": "^4.1.0",
+    "react-vis": "^1.11.7",
+    "sass": "^1.32.2"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1100.6",
-    "@angular/cli": "~11.0.6",
-    "@angular/compiler-cli": "~11.0.6",
-    "@types/jasmine": "~3.6.0",
-    "@types/lodash": "^4.14.167",
-    "@types/node": "^12.11.1",
-    "codelyzer": "^6.0.0",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.1.0",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage": "~2.0.3",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
-    "ts-node": "~8.3.0",
-    "tslint": "~6.1.0",
-    "typescript": "~4.0.2"
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/cookie": "^0.4.0",
+    "@types/lodash": "^4.14.168",
+    "@types/node": "^14.14.20",
+    "@types/react": "^17.0.0",
+    "commitizen": "^4.2.2",
+    "git-precommit-checks": "^3.0.6",
+    "husky": "^4.3.7",
+    "typescript": "^4.1.3"
   }
 }

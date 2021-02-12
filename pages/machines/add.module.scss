@@ -1,0 +1,56 @@
+.bg {
+  background: url("/add-node.svg") no-repeat bottom left;
+  background-position-x: 100px;
+  background-size: 220px;
+  border-bottom: 5px solid #dfc768;
+  position: fixed;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  display: block;
+  content: " ";
+}
+
+.connect {
+  box-sizing: border-box;
+  padding-top: 30px;
+  position: relative;
+
+  section {
+    max-width: 380px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background: #101013;
+    box-shadow: 0 0 5px #000;
+    border-radius: 15px;
+    padding: 30px;
+    box-sizing: border-box;
+  }
+
+  pre,
+  input {
+    text-align: start;
+    background: #000;
+    padding: 10px;
+    box-sizing: border-box;
+    margin: 15px 0;
+    display: block;
+    border: none;
+    width: 100%;
+  }
+
+  h1 {
+    font-weight: 100;
+    font-size: 17px;
+    margin-bottom: 45px;
+    color: #eee;
+  }
+}
+
+.list {
+  text-align: center;
+}

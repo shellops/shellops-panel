@@ -1,0 +1,154 @@
+.bg {
+  background: url("/thoughts.svg") no-repeat bottom left;
+  background-position-x: 100px;
+  background-size: 280px;
+  border-bottom: 5px solid #dfc768;
+  position: fixed;
+  z-index: 0;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  display: block;
+  content: " ";
+}
+
+.box {
+  width: 100%;
+  border-radius: 0 0 15px 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  vertical-align: top;
+  position: relative;
+  text-align: start;
+  color: #ccc;
+  background: #101013;
+  box-shadow: 0 0 5px #000;
+  max-width: 480px;
+  margin: 30px auto;
+
+  section {
+    padding: 15px;
+  }
+
+  .trash {
+    filter: invert(1);
+    height: 20px;
+    display: block;
+  }
+
+  .title {
+    font-weight: bold;
+    color: #999;
+    font-size: 15px;
+    line-height: 40px;
+
+    small {
+      font-size: 11px;
+      font-weight: 100;
+    }
+
+    img {
+      width: 30px;
+      max-height: 30px;
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 5px;
+    }
+  }
+
+  ul {
+    li {
+      font-size: 13px;
+      display: block;
+      padding: 5px;
+      font-weight: bold;
+      line-height: 24px;
+      color: #dfc768;
+
+      .inline {
+        display: inline-block;
+        vertical-align: top;
+      }
+      span {
+        margin-left: 5px;
+        color: #fff;
+        font-weight: 500;
+
+        img {
+          height: 16px;
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+
+      ul {
+        padding-left: 15px;
+        li {
+          border-bottom: none;
+          padding: 0;
+          line-height: 18px;
+          font-size: 11px;
+        }
+      }
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.versions {
+  .icon {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    box-sizing: border-box;
+
+    padding: 5px;
+    border-radius: 10px;
+    line-height: 18px;
+
+    span {
+      font-size: 9px;
+    }
+  }
+
+  img {
+    max-height: 30px;
+    max-width: 30px;
+
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.actions {
+  .icon {
+    text-align: center;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+    box-sizing: border-box;
+
+    padding: 5px;
+    border-radius: 10px;
+    line-height: 18px;
+
+    span {
+      white-space: nowrap;
+      font-size: 13px;
+    }
+  }
+
+  img {
+    max-height: 30px;
+    max-width: 30px;
+    display: inline-block;
+    margin: 0 auto;
+    vertical-align: middle;
+  }
+}
