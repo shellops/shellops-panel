@@ -10,6 +10,22 @@ export default function Apps({ machine }: AppProps) {
   const [realtime, realtimeChange] = useState({});
   const [charts, chartsChange] = useState({});
 
+  function stopContainer(containerId: string) {
+    fetchMachine(
+      `/api/v1/docker/containers/${containerId}/stop`,
+      machine.urlToken,
+      "POST"
+    );
+  }
+
+  function startContainer(containerId: string) {
+    fetchMachine(
+      `/api/v1/docker/containers/${containerId}/start`,
+      machine.urlToken,
+      "POST"
+    );
+  }
+
   const ws: { current: WebSocket } = useRef(null);
 
   useEffect(() => {
@@ -71,12 +87,12 @@ export default function Apps({ machine }: AppProps) {
       charts[id] = {
         memory: [
           ...(charts[id]?.memory ||
-            new Array(20).fill({ y: realtime[id].stats.memory })),
+            new Array(20).fill({ y: realtime[id].stats.memory || 0 })),
           { y: realtime[id].stats.memory },
         ].map((v, i) => ({ ...v, x: i })),
         cpu: [
           ...(charts[id]?.cpu ||
-            new Array(20).fill({ y: realtime[id].stats.cpu })),
+            new Array(20).fill({ y: realtime[id].stats.cpu || 0 })),
           { y: realtime[id].stats.cpu },
         ].map((v, i) => ({ ...v, x: i })),
       };
@@ -106,12 +122,12 @@ export default function Apps({ machine }: AppProps) {
 
             <div className={styles.buttons}>
               {realtime[container.Id]?.State?.Status !== "running" ? (
-                <button>
+                <button onClick={() => startContainer(container.Id)}>
                   <img src="/icons/solid/play.svg" alt="" />
                   Start
                 </button>
               ) : (
-                <button>
+                <button onClick={() => stopContainer(container.Id)}>
                   <img src="/icons/solid/stop.svg" alt="" />
                   Stop
                 </button>
@@ -144,7 +160,7 @@ export default function Apps({ machine }: AppProps) {
               ) : (
                 <></>
               )}
-              {charts?.[container.Id]?.cpu?.length ? (
+              {charts?.[container.Id]?.memory?.length ? (
                 <li>
                   CPU Usage: <span>{realtime[container.Id]?.stats?.cpu} %</span>
                   <div className={styles.chart}>
@@ -218,7 +234,6 @@ export default function Apps({ machine }: AppProps) {
 
               {realtime[container.Id]?.Config?.Env?.length ? (
                 <li>
-                  Variables:
                   <ul className={styles.variables}>
                     {realtime[container.Id].Config.Env.map((item, i) => (
                       <li key={i}>
