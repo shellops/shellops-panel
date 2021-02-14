@@ -30,6 +30,6 @@ jobs:
           source_file: "out/*"
           destination_repo: "shellops/shellops-electron"
           destination_folder: "./public"
-          destination_branch: "staging"
+          destination_branch: "master"
           user_email: "bot@shellops.io"
           user_name: "Shellops Bot"
