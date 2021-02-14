@@ -1,0 +1,35 @@
+name: Push dist to cli
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  push-api-to-cli:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.19.1]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - run: npm install --prefer-offline --no-audit --no-progress
+      - run: npm run build
+      - run: rm README.md
+      - name: Push folder
+        uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.BOT_TOKEN }}
+        with:
+          source_file: "out/*"
+          destination_repo: "shellops/shellops-electron"
+          destination_folder: "./public"
+          destination_branch: "staging"
+          user_email: "bot@shellops.io"
+          user_name: "Shellops Bot"
