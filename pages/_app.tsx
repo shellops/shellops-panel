@@ -34,15 +34,15 @@ const PanelApp = ({ Component, pageProps }) => {
   // * Handle machine changes, refresh every 3 second
   useLiveMachinesEffect(machinesChange);
 
-  useEffect(() => {
-    if (
-      !user &&
-      !loading &&
-      ["/machines"].find((p) => window.location.pathname.startsWith(p))
-    ) {
-      router.replace("/account");
-    }
-  });
+  // useEffect(() => {
+  //   if (
+  //     !user &&
+  //     !loading &&
+  //     ["/machines"].find((p) => window.location.pathname.startsWith(p))
+  //   ) {
+  //     router.replace("/account");
+  //   }
+  // });
 
   useEffect(() => {
       urlTokenChange(
@@ -71,7 +71,7 @@ const PanelApp = ({ Component, pageProps }) => {
         <Logo></Logo>
       </header>
 
-      {user ? <Nav {...pageProps}></Nav> : ""}
+      {!loading ? <Nav {...pageProps}></Nav> : ""}
 
       {loading ? <LoadingSpinner /> : <Component {...pageProps} />}
     </>
