@@ -27,7 +27,7 @@ jobs:
       - run: npm run build
       - name: Zip files # This would actually build your project, using zip for an example artifact
         run: |
-          zip panel out
+          zip -r panel out README.md
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
