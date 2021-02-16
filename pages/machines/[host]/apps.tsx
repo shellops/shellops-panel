@@ -29,9 +29,11 @@ export default function Apps({ machine }: AppProps) {
   const ws: { current: WebSocket } = useRef(null);
 
   useEffect(() => {
-    if (ws.current) return;
+    if (ws.current || !machine?.urlToken) return;
 
-    ws.current = new WebSocket("ws://localhost:3000");
+    ws.current = new WebSocket(
+      machine.urlToken.replace("http://", "ws://").replace("https://", "wss://")
+    );
     ws.current.onopen = () => console.log("ws opened");
     ws.current.onclose = () => console.log("ws closed");
 
@@ -101,7 +103,7 @@ export default function Apps({ machine }: AppProps) {
     };
 
     () => {};
-  }, [realtime, charts]);
+  }, [realtime, charts, machine]);
 
   return (
     <>
