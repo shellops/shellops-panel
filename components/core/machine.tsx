@@ -54,8 +54,8 @@ export default function Machine({
             GHZ
           </li>
 
-          <li>Memory: {prettyBytes(machine?.general?.memories[0]?.size)}</li>
-          <li>Disk: {prettyBytes(machine?.general?.disks[0]?.size)}</li>
+          <li>Memory: {prettyBytes(machine?.general?.memories?.[0]?.size || 0)}</li>
+          <li>Disk: {prettyBytes(machine?.general?.disks?.[0]?.size  || 0 )}</li>
         </ul>
       ) : (
         <div>
@@ -74,7 +74,7 @@ export default function Machine({
 
       <div className={styles.actions}>
         <img onClick={removeMachine} src="icons/solid/trash.svg" alt="" />
-        <button onClick={() => router.push("/machines/localhost")}>
+        <button onClick={() => router.push("/machines/" + machine.hostname)}>
           Manage
         </button>
       </div>
