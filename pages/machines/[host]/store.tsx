@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import fetchMachine from "../../../lib/fetch-machine";
+import { AppProps } from "../../../lib/interfaces/app-props.interface";
 
 import styles from "./store.module.scss";
 
-export default function Store() {
+export default function Store({ machine }: AppProps) {
   const [templates, templatesChange] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/api/v1/store/app-templates`).then(
+    fetchMachine(`/api/v1/store/app-templates`, machine.urlToken).then(
       async (res) => {
-        templatesChange(await res.json());
+        templatesChange(res);
       }
     );
   });
