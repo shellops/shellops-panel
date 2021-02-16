@@ -52,22 +52,17 @@ export function getUrlTokens(): string[] {
 export default function useLiveMachinesEffect(machinesChange: any) {
 
   useEffect(() => {
-    let refreshTimeout;
 
     const recurr = async () => {
       const updatedMachines = await refreshMachines(getUrlTokens());
 
       machinesChange(updatedMachines);
 
-      refreshTimeout = setTimeout(() => {
-        recurr();
-      }, 3000);
     };
 
     recurr();
 
     return () => {
-      clearTimeout(refreshTimeout);
     };
   }, []);
 }
