@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
-import Machine from '../../components/core/machine';
-import LoadingSpinner from '../../components/layout/loading';
-import { AppProps } from '../../lib/interfaces/app-props.interface';
-import { getUrlTokens } from '../../lib/live-machines.effect';
-import removeMachine from '../../lib/remove-machine';
-import styles from './index.module.scss';
+import Machine from "../../components/core/machine";
+import LoadingSpinner from "../../components/layout/loading";
+import { AppProps } from "../../lib/interfaces/app-props.interface";
+import { getUrlTokens } from "../../lib/get-url-tokens";
+import removeMachine from "../../lib/remove-machine";
+import styles from "./index.module.scss";
 
 export default function MachinesIndex({ machines }: AppProps) {
   const [urlTokens, urlTokensChange] = useState([]);
@@ -15,9 +15,9 @@ export default function MachinesIndex({ machines }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    urlTokensChange(getUrlTokens())
+    urlTokensChange(getUrlTokens());
     loadingChange(false);
-  }, []);
+  }, [loading]);
 
   return loading ? (
     <LoadingSpinner />

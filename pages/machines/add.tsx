@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 import { AppProps } from "../../lib/interfaces/app-props.interface";
-import { getUrlTokens } from "../../lib/live-machines.effect";
+import { getUrlTokens } from "../../lib/get-url-tokens";
 import saveMachine from "../../lib/save-machine";
 import styles from "./add.module.scss";
 
@@ -21,8 +21,23 @@ const Home: NextPage<any> = ({ machines }: AppProps) => {
   const handleSaveMachine = () => {
     if (!urlToken || urlTokens?.find((p) => p === urlToken)) return;
     saveMachine(urlToken, urlTokensChange);
-    router.push("/machines");
+    router.replace("/machines");
   };
+
+  useEffect(() => {
+   
+    if (location.href.includes("?local=")) {
+      const encodedUrl = location.href.split("?local=")[1].split("&")[0];
+
+      const urlToken = atob(decodeURIComponent(encodedUrl));
+
+      if (!urlTokens.find((p) => p.includes("localhost"))) {
+        saveMachine(urlToken, urlTokensChange);
+      }
+
+      router.replace("/machines");
+    }
+  }, [urlTokens]);
 
   return (
     <>

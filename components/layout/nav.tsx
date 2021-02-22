@@ -1,7 +1,8 @@
-import { useRouter } from "next/router";
-import { AppProps } from "../../lib/interfaces/app-props.interface";
-import Logout from "../../lib/logout";
-import styles from "./nav.module.scss";
+import { useRouter } from 'next/router';
+
+import { AppProps } from '../../lib/interfaces/app-props.interface';
+import Logout from '../../lib/logout';
+import styles from './nav.module.scss';
 
 export default function Nav({ machine, machines, user }: AppProps) {
   const router = useRouter();
@@ -90,7 +91,7 @@ export default function Nav({ machine, machines, user }: AppProps) {
           </>
         )}
 
-        <li>
+        {/* <li>
           <img src="/icons/solid/user-secret.svg" alt="" />
           {user?.displayName}{" "}
           <img
@@ -104,7 +105,7 @@ export default function Nav({ machine, machines, user }: AppProps) {
               Logout
             </li>
           </ul>
-        </li>
+        </li> */}
       </ul>
     </nav>
   );
