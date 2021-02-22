@@ -1,7 +1,6 @@
 import { pick } from "lodash";
 import { useRouter } from "next/router";
 import prettyBytes from "pretty-bytes";
-import { memo } from "react";
 
 import { AppProps } from "../../../lib/interfaces/app-props.interface";
 import removeMachine from "../../../lib/remove-machine";
