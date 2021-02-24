@@ -1,16 +1,45 @@
 import moment from "moment";
 import React, { useEffect, useRef, useState } from "react";
 import { LineSeries, XYPlot } from "react-vis";
-import fetchMachine from "../../../lib/fetch-machine";
 
+import LoadingSpinner from "../../../components/layout/loading";
+import fetchMachine from "../../../lib/fetch-machine";
 import { AppProps } from "../../../lib/interfaces/app-props.interface";
 import styles from "./apps.module.scss";
 
-export default function Apps({ machine }: AppProps) {
+export default function Apps({ machine, refreshMachines }: AppProps) {
   const [realtime, realtimeChange] = useState({});
   const [charts, chartsChange] = useState({});
+  const [loading, loadingChange] = useState(true);
+
+  function uninstallApp(appId: string) {
+    loadingChange(true);
+    fetchMachine(
+      `/api/v1/machine/apps/${appId}`,
+      machine.urlToken,
+      "DELETE"
+    ).then(() => {
+      refreshMachines().then(() => {
+        loadingChange(false);
+      });
+    });
+  }
+
+  function removeContainer(containerId: string) {
+    loadingChange(true);
+    fetchMachine(
+      `/api/v1/docker/containers/${containerId}`,
+      machine.urlToken,
+      "DELETE"
+    ).then(() => {
+      refreshMachines().then(() => {
+        loadingChange(false);
+      });
+    });
+  }
 
   function stopContainer(containerId: string) {
+    loadingChange(true);
     fetchMachine(
       `/api/v1/docker/containers/${containerId}/stop`,
       machine.urlToken,
@@ -100,19 +129,27 @@ export default function Apps({ machine }: AppProps) {
       };
 
       chartsChange(charts);
+      loadingChange(false);
     };
 
     () => {};
-  }, [realtime, charts, machine]);
+  }, [realtime, charts, loading, machine]);
 
-  return (
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
     <>
       <div className={styles.bg}></div>
-      <div className="container">
+      <div className={styles.apps}>
         {machine?.containers?.map((container) => (
           <div key={container.Id} className={styles.app}>
             <div className={styles.title}>
-              <img src={container.app?.logo} alt="" />
+              {container.app?.logo ? (
+                <img src={container.app?.logo} alt="" />
+              ) : (
+                <></>
+              )}
+
               {!container.app?.name ? (
                 <span>{container.Names?.[0]?.replace("/", "")}</span>
               ) : (
@@ -135,7 +172,13 @@ export default function Apps({ machine }: AppProps) {
                 </button>
               )}
 
-              <button>
+              <button
+                onClick={() =>
+                  container.app?.id
+                    ? uninstallApp(container.app.id)
+                    : removeContainer(container.Id)
+                }
+              >
                 <img src="/icons/solid/trash.svg" alt="" />
                 Uninstall
               </button>
@@ -221,11 +264,14 @@ export default function Apps({ machine }: AppProps) {
               {container.Mounts?.length ? (
                 <li>
                   Mounts:
-                  <ul>
+                  <ul className={styles.mounts}>
                     {container.Mounts.map((item, i) => (
                       <li key={i}>
-                        <span> {item.Source || "-"} </span> {"->"}
-                        <span> {item.Destination || "-"}</span>
+                        <input
+                          type="text"
+                          readOnly
+                          value={`${item.Source || "-"}:${item.Destination}`}
+                        />
                       </li>
                     ))}
                   </ul>
