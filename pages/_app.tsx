@@ -1,17 +1,50 @@
-import '../styles/globals.scss';
+import "../styles/globals.scss";
 
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
-import LoadingSpinner from '../components/layout/loading';
-import Logo from '../components/layout/logo';
-import Nav from '../components/layout/nav';
-import currentUserEffect from '../lib/current-user.effect';
-import fetchMachine from '../lib/fetch-machine';
-import initFirebase from '../lib/firebase';
-import { AppProps } from '../lib/interfaces/app-props.interface';
-import { getUrlTokens } from '../lib/get-url-tokens';
+import LoadingSpinner from "../components/layout/loading";
+import Logo from "../components/layout/logo";
+import Nav from "../components/layout/nav";
+import currentUserEffect from "../lib/current-user.effect";
+import fetchMachine from "../lib/fetch-machine";
+import initFirebase from "../lib/firebase";
+import { getUrlTokens } from "../lib/get-url-tokens";
+import { AppProps } from "../lib/interfaces/app-props.interface";
+
+function getMachinesInfo(urlTokens: string[]) {
+  return Promise.all(
+    urlTokens.map(async (urlToken) => {
+      try {
+        const apps = await fetchMachine(`/api/v1/machine/apps`, urlToken);
+
+        const containers = (
+          await fetchMachine(`/api/v1/docker/containers`, urlToken)
+        ).map((container) => {
+          container.app = apps.find(
+            (p) => "/" + p.container === container.Names[0]
+          );
+          return container;
+        });
+
+        return {
+          general: await fetchMachine("/api/v1/sysinfo/general", urlToken),
+          // geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
+          urlToken,
+          apps,
+          containers,
+          hostname: urlToken?.split("@")[1].split(":")[0],
+        };
+      } catch (error) {
+        return {
+          error,
+          urlToken,
+        };
+      }
+    })
+  );
+}
 
 const PanelApp = ({ Component, pageProps }) => {
   initFirebase();
@@ -32,42 +65,15 @@ const PanelApp = ({ Component, pageProps }) => {
 
   const [machines, machinesChange] = useState([]);
 
+  const refreshMachines = () =>
+    getMachinesInfo(urlTokens)
+      .then((updatedMachines) => {
+        machinesChange(updatedMachines);
+      })
+      .catch((e) => console.error);
+
   useEffect(() => {
-    if (!loading && !machines.length && urlTokens.length)
-      Promise.all(
-        urlTokens.map(async (urlToken) => {
-          try {
-            const apps = await fetchMachine(`/api/v1/machine/apps`, urlToken);
-
-            const containers = (
-              await fetchMachine(`/api/v1/docker/containers`, urlToken)
-            ).map((container) => {
-              container.app = apps.find(
-                (p) => "/" + p.container === container.Names[0]
-              );
-              return container;
-            });
-
-            return {
-              general: await fetchMachine("/api/v1/sysinfo/general", urlToken),
-              // geoIp: await fetchMachine("/api/v1/sysinfo/geo-ip", urlToken),
-              urlToken,
-              apps,
-              containers,
-              hostname: urlToken?.split("@")[1].split(":")[0],
-            };
-          } catch (error) {
-            return {
-              error,
-              urlToken,
-            };
-          }
-        })
-      )
-        .then((updatedMachines) => {
-          machinesChange(updatedMachines);
-        })
-        .catch((e) => console.error);
+    if (!loading && !machines.length && urlTokens.length) refreshMachines();
   }, [urlTokens, machines, loading]);
 
   // useEffect(() => {
@@ -95,6 +101,7 @@ const PanelApp = ({ Component, pageProps }) => {
     user,
     machine,
     machines,
+    refreshMachines,
   } as AppProps);
 
   return (

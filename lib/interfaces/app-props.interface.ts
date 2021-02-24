@@ -5,5 +5,6 @@ export interface AppProps {
   machines?: MachineInfo[];
   machine?: MachineInfo;
   user?: any
+  refreshMachines?: () => Promise<void>;
 
 }
